@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../Styles/GlobalStyles";
 import Theme from "../Styles/Theme";
-import Router from "./Routes";
+import Routes from "./Routes";
 import { useQuery } from "react-apollo-hooks";
 
 const QUERY = gql`
@@ -20,7 +20,7 @@ export default () => {
     <ThemeProvider theme={Theme}>
       <>
         <GlobalStyles />
-        <Router isLoggedIn={isLoggedIn} />
+        <Routes isLoggedIn={isLoggedIn} />
       </>
     </ThemeProvider>
   );
