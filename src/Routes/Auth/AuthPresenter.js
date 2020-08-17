@@ -37,6 +37,7 @@ export default ({
   firstName,
   lastName,
   email,
+  password,
   setAction,
   onSubmit
 }) => (
@@ -49,6 +50,7 @@ export default ({
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder={"Email"} {...email} type="email" />
+            <Input placeholder={"Password"} {...password} type="password" />
             <Button text={"Log In"} />
           </form>
         </>
@@ -58,9 +60,10 @@ export default ({
             <title>Sign Up | Prismasocial</title>
           </Helmet>
           <form onSubmit={onSubmit}>
+            <Input placeholder={"Email"} {...email} type="email" />
+            <Input placeholder={"Password"} {...password} type="password" />
             <Input placeholder={"First name"} {...firstName} />
             <Input placeholder={"Last name"} {...lastName} />
-            <Input placeholder={"Email"} {...email} type="email" />
             <Input placeholder={"Username"} {...username} />
             <Button text={"Sign Up"} />
           </form>
