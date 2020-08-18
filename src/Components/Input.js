@@ -38,8 +38,8 @@ const Input = ({
 
 Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
-  required: PropTypes.string.isRequired,
-  value: PropTypes.bool,
+  required: PropTypes.bool.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string
 };
