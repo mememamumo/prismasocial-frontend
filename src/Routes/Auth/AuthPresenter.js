@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, 0);
   ${(props) => props.theme.box};
-  box-shadow: 8px 8px 0 0 #003489;
   margin-bottom: 100px;
 `;
 
@@ -51,8 +50,13 @@ export default ({
             <title>Log In | Prismasocial</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"Email"} {...email} type="email" />
-            <Input placeholder={"Password"} {...password} type="password" />
+            <Input placeholder={"Email"} {...email} required type="email" />
+            <Input
+              placeholder={"Password"}
+              {...password}
+              required
+              type="password"
+            />
             <Button text={"Log In"} />
           </form>
         </>
@@ -63,16 +67,22 @@ export default ({
             <title>Sign Up | Prismasocial</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"Email"} {...email} type="email" />
-            <Input placeholder={"Password"} {...password} type="password" />
+            <Input placeholder={"Email"} {...email} required type="email" />
+            <Input
+              placeholder={"Password"}
+              {...password}
+              required
+              type="password"
+            />
             <Input
               placeholder={"Confirm your Password"}
               {...confirmPassword}
+              required
               type="password"
             />
-            <Input placeholder={"First name"} {...firstName} />
-            <Input placeholder={"Last name"} {...lastName} />
-            <Input placeholder={"Username"} {...username} />
+            <Input placeholder={"First name"} required {...firstName} />
+            <Input placeholder={"Last name"} required {...lastName} />
+            <Input placeholder={"Username"} required {...username} />
             <Button text={"Sign Up"} />
           </form>
         </>

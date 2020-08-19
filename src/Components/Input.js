@@ -6,7 +6,7 @@ const Container = styled.input`
   background: transparent;
   color: ${(props) => props.theme.blue};
   font-size: 1.1em;
-  font-weight: 900;
+  font-weight: 700;
   border: 2px solid #003489;
   border-top: 0;
   border-left: 0;
@@ -16,7 +16,7 @@ const Container = styled.input`
   height: 2.5em;
   &::placeholder {
     color: ${(props) => props.theme.blue};
-    font-weight: 900;
+    font-weight: 700;
   }
 `;
 

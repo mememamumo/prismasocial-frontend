@@ -16,7 +16,8 @@ export default {
   deepGray: "#767676",
   box: `border: ${BOX_BORDER};
         border-radius: ${RADIUS};
-				background-color: #f6f6f6;
+        background-color: #f6f6f6;
+        box-shadow: 8px 8px 0 0 #003489;
   `,
   grid: `background-color: ${BACKGROUND_FILL_COLOR};
          background-image:

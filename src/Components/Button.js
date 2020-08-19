@@ -6,7 +6,7 @@ const Container = styled.button`
   box-sizing: border-box;
   outline: none;
   color: ${(props) => props.theme.blue};
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.1em;
   ${(props) => props.theme.box};
   padding: 10px 30px 13px 30px;
