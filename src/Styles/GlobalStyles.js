@@ -15,11 +15,14 @@ export default createGlobalStyle`
 		color: ${(props) => props.theme.blue};
 		font-size: 14px;
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-		padding-top: 40px;
+		padding-top: 160px;
 	}
 	a {
 		color: ${(props) => props.theme.blue};
 		text-decoration: none;
+		&:hover {
+			color: ${(props) => props.theme.pink};
+		}
 	}
 	input:focus {
 		outline:none;

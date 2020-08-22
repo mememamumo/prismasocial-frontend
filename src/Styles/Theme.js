@@ -12,6 +12,7 @@ export default {
   blue: "#003589",
   deepBlue: "#253167",
   lightBlue: "#0446E3",
+  pink: "#EE719E",
   black: "#121212",
   gray: "#c9c9c9",
   deepGray: "#767676",
