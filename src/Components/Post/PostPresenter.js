@@ -60,15 +60,12 @@ const File = styled.div`
 
 const Button = styled.span`
   cursor: pointer;
-  svg {
-    fill: ${(props) => props.theme.blue};
-  }
 `;
 
 const Buttons = styled.div`
   ${Button} {
     &:first-child {
-      margin-right: 10px;
+      margin-right: 12px;
     }
   }
   margin-bottom: 10px;
@@ -130,7 +127,8 @@ export default ({
   newComment,
   onKeyPress,
   comments,
-  selfComments
+  selfComments,
+  toggleLike
 }) => (
   <Post>
     <Header>
@@ -155,7 +153,7 @@ export default ({
     </Files>
     <Meta>
       <Buttons>
-        <Button>{isLiked ? <FullPaw /> : <Paw />}</Button>
+        <Button onClick={toggleLike}>{isLiked ? <FullPaw /> : <Paw />}</Button>
         <Button>
           <Bubble />
         </Button>

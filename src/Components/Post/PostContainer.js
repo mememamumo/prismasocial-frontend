@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
 import { useMutation } from "react-apollo-hooks";
-import { ADD_COMMENT } from "./PostQueries";
+import { ADD_COMMENT, TOGGLE_LIKE } from "./PostQueries";
 import { toast } from "react-toastify";
 
 const PostContainer = ({
@@ -25,6 +25,10 @@ const PostContainer = ({
 
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value }
+  });
+
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
+    variables: { postId: id }
   });
 
   const slider = () => {
@@ -58,6 +62,17 @@ const PostContainer = ({
     }
   };
 
+  const toggleLike = () => {
+    toggleLikeMutation();
+    if (isLikedS === true) {
+      setIsLiked(false);
+      setLikeCount(likeCountS - 1);
+    } else {
+      setIsLiked(true);
+      setLikeCount(likeCountS + 1);
+    }
+  };
+
   return (
     <PostPresenter
       id={id}
@@ -75,6 +90,7 @@ const PostContainer = ({
       currentItem={currentItem}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
+      toggleLike={toggleLike}
     />
   );
 };

@@ -11,3 +11,9 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const TOGGLE_LIKE = gql`
+  mutation toggleLike($postId: String!) {
+    toggleLike(postId: $postId)
+  }
+`;
