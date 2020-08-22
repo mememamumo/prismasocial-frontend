@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
-import { Logo, User, Paw, Explore } from "./Icons";
+import { Logo, Paw, Explore } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
+import Avatar from "./Avatar";
 
 const Header = styled.header`
   width: 100%;
@@ -15,9 +16,6 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   z-index: 2;
-  svg {
-    fill: #003589;
-  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -39,6 +37,8 @@ const HeaderColumn = styled.div`
   &:last-child {
     margin-left: auto;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
   }
 `;
 
@@ -53,6 +53,8 @@ const LogoLink = styled(Link)`
 const HeaderLink = styled(Link)`
   margin-right: 30px;
 `;
+
+const EAvatar = styled(Avatar)``;
 
 export default withRouter(({ history }) => {
   const search = useInput("");
@@ -88,8 +90,8 @@ export default withRouter(({ history }) => {
               <Paw size={28} />
             </HeaderLink>
             {data.me !== undefined && (
-              <HeaderLink to={data.me.username}>
-                <User size={28} />
+              <HeaderLink to={data.me ? data.me.username : "/#"}>
+                <EAvatar url={data.me && data.me.avatar} size="sm" />
               </HeaderLink>
             )}
           </HeaderColumn>

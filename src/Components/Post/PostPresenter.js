@@ -10,7 +10,7 @@ import { FullPaw, Paw, Bubble } from "../Icons";
 import TextareaAutosize from "react-autosize-textarea";
 
 const Post = styled.div`
-  ${(props) => props.theme.box};
+  ${(props) => props.theme.toneBox};
   width: 100%;
   max-width: 600px;
   user-select: none;
@@ -21,7 +21,7 @@ const Post = styled.div`
 `;
 
 const Header = styled.header`
-  padding: 18px;
+  padding: 20px;
   display: flex;
   align-items: center;
 `;
@@ -72,7 +72,7 @@ const Buttons = styled.div`
 `;
 
 const Meta = styled.div`
-  padding: 18px;
+  padding: 20px;
 `;
 
 const Caption = styled.div`
@@ -92,7 +92,7 @@ const Textarea = styled(TextareaAutosize)`
   resize: none;
   font-size: 14px;
   color: ${(props) => props.theme.blue};
-  padding: 18px;
+  padding: 20px;
   &:focus {
     outline: none;
   }

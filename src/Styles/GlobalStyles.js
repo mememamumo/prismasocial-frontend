@@ -9,6 +9,8 @@ export default createGlobalStyle`
 	}
 	html, body {
 		position: relative;
+		width: 100%;
+		height: 100vh;
 	}
 	body {
 		${(props) => props.theme.grid};

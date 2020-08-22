@@ -1,7 +1,7 @@
 const BOX_BORDER = "3px solid #003589";
 const RADIUS = "5px";
 const BACKGROUND_FILL_COLOR = "#d9b2ce";
-const BACKGROUND_GRID_COLOR = "#462941";
+const BACKGROUND_GRID_COLOR = "rgba(70, 41, 64, 0.6)";
 
 export default {
   maxWidth: "935px",
@@ -20,6 +20,10 @@ export default {
         border-radius: ${RADIUS};
         background-color: #f6f6f6;
         box-shadow: 8px 8px 0 0 #003489;
+  `,
+  toneBox: `border-radius: ${RADIUS};
+            background-color: #f6f6f6;
+            box-shadow: 8px 8px 0 0 #d9b2ce;
   `,
   grid: `background-color: ${BACKGROUND_FILL_COLOR};
          background-image:
