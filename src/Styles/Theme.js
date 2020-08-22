@@ -15,7 +15,7 @@ export default {
   pink: "#EE719E",
   black: "#121212",
   gray: "#c9c9c9",
-  deepGray: "#767676",
+  deepGray: "#8e8e8e",
   box: `border: ${BOX_BORDER};
         border-radius: ${RADIUS};
         background-color: #f6f6f6;

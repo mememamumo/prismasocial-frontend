@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
+import { useMutation } from "react-apollo-hooks";
+import { ADD_COMMENT } from "./PostQueries";
+import { toast } from "react-toastify";
 
 const PostContainer = ({
   id,
@@ -17,7 +20,13 @@ const PostContainer = ({
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
+  const [selfComments, setSelfComments] = useState([]);
   const comment = useInput("");
+
+  const [addCommentMutation] = useMutation(ADD_COMMENT, {
+    variables: { postId: id, text: comment.value }
+  });
+
   const slider = () => {
     const totalFiles = files.length;
     if (currentItem === totalFiles - 1) {
@@ -28,8 +37,27 @@ const PostContainer = ({
   };
   useEffect(() => {
     slider();
-  }, [currentItem]);
-  console.log(currentItem);
+  });
+
+  const onKeyPress = async (e) => {
+    const { which } = e;
+    // console.log(e);
+    if (which === 13) {
+      e.preventDefault();
+      try {
+        const {
+          data: { addComment }
+        } = await addCommentMutation();
+        setSelfComments([...selfComments, addComment]);
+        console.log(comment);
+        comment.setValue("");
+      } catch (error) {
+        console.log(error);
+        toast.error("😂 댓글을 달 수 없습니다.");
+      }
+    }
+  };
+
   return (
     <PostPresenter
       id={id}
@@ -45,6 +73,8 @@ const PostContainer = ({
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
       currentItem={currentItem}
+      onKeyPress={onKeyPress}
+      selfComments={selfComments}
     />
   );
 };

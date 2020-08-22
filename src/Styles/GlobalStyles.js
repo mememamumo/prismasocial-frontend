@@ -27,4 +27,12 @@ export default createGlobalStyle`
 	input:focus {
 		outline:none;
 	}
+	textarea {
+		border: none;
+		resize: none;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		&::placeholder {
+			color: ${(props) => props.theme.blue};
+		}
+	}
 `;

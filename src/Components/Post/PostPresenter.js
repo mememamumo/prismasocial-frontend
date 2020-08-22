@@ -7,6 +7,7 @@ import "moment/locale/ko";
 import BoldText from "../BoldText";
 import Avatar from "../Avatar";
 import { FullPaw, Paw, Bubble } from "../Icons";
+import TextareaAutosize from "react-autosize-textarea";
 
 const Post = styled.div`
   ${(props) => props.theme.box};
@@ -79,13 +80,42 @@ const Meta = styled.div`
 
 const Caption = styled.div`
   margin: 10px 0;
-  line-height: 1.1;
+  line-height: 1.2;
 `;
 
 const Timestamp = styled.span`
   font-weight: 400;
   display: block;
   font-size: 12px;
+`;
+
+const Textarea = styled(TextareaAutosize)`
+  border: none;
+  width: 100%;
+  resize: none;
+  font-size: 14px;
+  color: ${(props) => props.theme.blue};
+  padding: 18px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Comments = styled.ul``;
+
+const CommentUser = styled(BoldText)`
+  margin-right: 5px;
+`;
+
+const Comment = styled.li`
+  margin-bottom: 3px;
+  line-height: 1.2;
+  &:first-child {
+    margin-top: 13px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 export default ({
@@ -96,7 +126,11 @@ export default ({
   likeCount,
   createdAt,
   caption,
-  currentItem
+  currentItem,
+  newComment,
+  onKeyPress,
+  comments,
+  selfComments
 }) => (
   <Post>
     <Header>
@@ -136,6 +170,32 @@ export default ({
       <Timestamp>
         <Moment fromNow>{createdAt}</Moment>
       </Timestamp>
+      {comments && (
+        <Comments>
+          {comments.map((comment) => (
+            <Comment key={comment.id}>
+              <Link to={`/${username}`}>
+                <CommentUser text={comment.user.username} />
+              </Link>
+              {comment.text}
+            </Comment>
+          ))}
+          {selfComments.map((comment) => (
+            <Comment key={comment.id}>
+              <Link to={`/${username}`}>
+                <CommentUser text={comment.user.username} />
+              </Link>
+              {comment.text}
+            </Comment>
+          ))}
+        </Comments>
+      )}
     </Meta>
+    <Textarea
+      placeholder={"댓글을 달아주세요 :-)"}
+      value={newComment.value}
+      onChange={newComment.onChange}
+      onKeyPress={onKeyPress}
+    />
   </Post>
 );
