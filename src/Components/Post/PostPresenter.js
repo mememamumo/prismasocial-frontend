@@ -96,6 +96,9 @@ const Textarea = styled(TextareaAutosize)`
   &:focus {
     outline: none;
   }
+  &::placeholder {
+    font-weight: normal;
+  }
 `;
 
 const Comments = styled.ul``;
