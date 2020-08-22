@@ -1,7 +1,7 @@
 const BOX_BORDER = "3px solid #003589";
 const RADIUS = "5px";
 const BACKGROUND_FILL_COLOR = "#d9b2ce";
-const BACKGROUND_GRID_COLOR = "rgba(70, 41, 64, 0.6)";
+const BACKGROUND_GRID_COLOR = "rgba(70, 41, 64, 0.7)";
 
 export default {
   maxWidth: "935px",
@@ -26,23 +26,7 @@ export default {
             box-shadow: 8px 8px 0 0 #d9b2ce;
   `,
   grid: `background-color: ${BACKGROUND_FILL_COLOR};
-         background-image:
-          repeating-linear-gradient(
-            to right,
-            ${BACKGROUND_GRID_COLOR} 0,
-            ${BACKGROUND_GRID_COLOR} 1px,
-            transparent 1px,
-            transparent 28px
-          ),
-          repeating-linear-gradient(
-            to bottom,
-            ${BACKGROUND_GRID_COLOR} 0,
-            ${BACKGROUND_GRID_COLOR} 1px,
-            transparent 1px,
-            transparent 28px
-          )
-        ;
-         background-position: 100px 0, 0 0;
-         background-size: 28px;
+        background-image: linear-gradient(${BACKGROUND_GRID_COLOR} 1px, transparent 1px), linear-gradient(90deg, ${BACKGROUND_GRID_COLOR} 1px, transparent 1px);
+        background-size: 28px 28px;
   `
 };

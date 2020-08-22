@@ -35,6 +35,7 @@ export default createGlobalStyle`
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 		&::placeholder {
 			color: ${(props) => props.theme.blue};
+			font-weight: 700;
 		}
 	}
 `;
