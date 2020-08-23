@@ -1,7 +1,7 @@
 const BOX_BORDER = "3px solid #003589";
 const RADIUS = "5px";
 const BACKGROUND_FILL_COLOR = "#d9b2ce";
-const BACKGROUND_GRID_COLOR = "rgba(70, 41, 64, 0.7)";
+const BACKGROUND_GRID_COLOR = "rgba(70, 41, 64, 0.3)";
 
 export default {
   maxWidth: "935px",

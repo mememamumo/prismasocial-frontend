@@ -4,19 +4,30 @@ import PropTypes from "prop-types";
 import BoldText from "../../Components/BoldText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
+import SquarePost from "../../Components/SquarePost";
 
 const Wrapper = styled.div`
   height: 50vh;
-  background-color: ${(props) => props.theme.bgPinkColor};
 `;
 
 const Section = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 36px;
   display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(4, 160px);
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
+  grid-gap: 2%;
+  grid-template-columns: repeat(5, 18.5%);
+  grid-template-rows: 170px;
+  grid-auto-rows: 170px;
+`;
+
+const PostSection = styled(Section)`
+  grid-gap: 0;
+  grid-template-columns: repeat(3, 33.333%);
+  grid-template-rows: 300px;
+  grid-auto-rows: 300px;
+`;
+
+const EBoldText = styled(BoldText)`
+  margin: 18px 0 0 18px;
 `;
 
 const SearchPresenter = ({ searchTerm, loading, data }) => {
@@ -37,7 +48,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
       <Wrapper>
         <Section>
           {data.searchUser.length === 0 ? (
-            <BoldText text="유저를 찾을 수 없습니다." />
+            <EBoldText text="유저를 찾을 수 없습니다." />
           ) : (
             data.searchUser.map((user) => (
               <UserCard
@@ -51,13 +62,20 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
             ))
           )}
         </Section>
-        <Section>
+        <PostSection>
           {data.searchPost.length === 0 ? (
-            <BoldText text="포스트가 없습니다." />
+            <EBoldText text="포스트가 없습니다." />
           ) : (
-            data.searchPost.map((post) => null)
+            data.searchPost.map((post) => (
+              <SquarePost
+                key={post.id}
+                likeCount={post.likeCount}
+                commentCount={post.commentCount}
+                file={post.files[0]}
+              />
+            ))
           )}
-        </Section>
+        </PostSection>
       </Wrapper>
     );
   }

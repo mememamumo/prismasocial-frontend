@@ -18,6 +18,9 @@ const Post = styled.div`
   a {
     color: inherit;
   }
+  svg {
+    fill: ${(props) => props.theme.pink};
+  }
 `;
 
 const Header = styled.header`

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../Button";
 
 const EButton = styled(Button)`
+  margin-top: 5px;
   padding: 5px 10px;
   ${(props) =>
     props.isFollowing ? props.theme.unfollowBtn : props.theme.followBtn};
