@@ -41,7 +41,7 @@ const PostContainer = ({
   };
   useEffect(() => {
     slider();
-  }, [currentItem]);
+  });
 
   const onKeyPress = async (e) => {
     const { which } = e;

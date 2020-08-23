@@ -7,6 +7,7 @@ import UserCard from "../../Components/UserCard";
 
 const Wrapper = styled.div`
   height: 50vh;
+  background-color: ${(props) => props.theme.bgPinkColor};
 `;
 
 const Section = styled.div`

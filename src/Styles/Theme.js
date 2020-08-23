@@ -25,6 +25,16 @@ export default {
             background-color: #f6f6f6;
             box-shadow: 8px 8px 0 0 #d9b2ce;
   `,
+  followBtn: `background-color: #f6f6f6;
+              color: #003589;
+              border: 3px solid #003589;
+              box-shadow: 4px 4px 0 0 #003589;
+  `,
+  unfollowBtn: `background-color: #d9b2ce;
+                color: #003589;
+                border: 3px solid #003589;
+                box-shadow: 4px 4px 0 0 #003589;
+  `,
   grid: `background-color: ${BACKGROUND_FILL_COLOR};
         background-image: linear-gradient(${BACKGROUND_GRID_COLOR} 1px, transparent 1px), linear-gradient(90deg, ${BACKGROUND_GRID_COLOR} 1px, transparent 1px);
         background-size: 28px 28px;
