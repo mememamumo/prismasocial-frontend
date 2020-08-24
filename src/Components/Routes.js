@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Auth from "../Routes/Auth";
 import Timeline from "../Routes/Timeline";
 import Search from "../Routes/Search";
@@ -11,12 +11,14 @@ const LoggedInRoutes = () => (
     <Route exact path="/" component={Timeline} />
     <Route exact path="/search" component={Search} />
     <Route exact path="/:username" component={Profile} />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 
 const LoggedOutRoutes = () => (
   <Switch>
     <Route exact path="/" component={Auth} />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 

@@ -6,6 +6,7 @@ import Avatar from "../../Components/Avatar";
 import BoldText from "../../Components/BoldText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -44,6 +45,11 @@ const Username = styled.span`
 
 const EFollowButton = styled(FollowButton)`
   margin-top: 0;
+`;
+
+const EButton = styled(Button)`
+  padding: 5px 10px;
+  background-color: ${(props) => props.theme.bgPinkColor};
 `;
 
 const Counts = styled.ul`
@@ -86,7 +92,8 @@ const ProfilePresenter = ({
   posts,
   followingCount,
   followersCount,
-  postsCount
+  postsCount,
+  logOut
 }) => {
   if (loading === true) {
     return (
@@ -107,7 +114,11 @@ const ProfilePresenter = ({
           <HeaderColumn>
             <UsernameRow>
               <Username>{username}</Username>
-              {!isSelf && <EFollowButton isFollowing={isFollowing} id={id} />}
+              {isSelf ? (
+                <EButton onClick={logOut} text="Log Out" />
+              ) : (
+                <EFollowButton isFollowing={isFollowing} id={id} />
+              )}
             </UsernameRow>
             <Counts>
               <Count>

@@ -6,6 +6,7 @@ export const resolvers = {
   Mutation: {
     logUserIn: (_, { token }, { cache }) => {
       localStorage.setItem("token", token);
+      window.location = "/";
       cache.writeData({
         data: {
           isLoggedIn: true

@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom/";
-import { useQuery } from "react-apollo-hooks";
-import { GET_USER } from "./ProfileQueries";
+import { useQuery, useMutation } from "react-apollo-hooks";
+import { GET_USER, LOG_OUT } from "./ProfileQueries";
 import ProfilePresenter from "./ProfilePresenter";
 import Loader from "../../Components/Loader";
 
@@ -12,6 +12,7 @@ export default withRouter(
     }
   }) => {
     const { data, loading } = useQuery(GET_USER, { variables: { username } });
+    const [logOut] = useMutation(LOG_OUT);
     if (loading === true) {
       return <Loader />;
     } else if (!loading && data && data.seeUser) {
@@ -44,6 +45,7 @@ export default withRouter(
           followersCount={followersCount}
           postsCount={postsCount}
           posts={posts}
+          logOut={logOut}
         />
       );
     } else {
