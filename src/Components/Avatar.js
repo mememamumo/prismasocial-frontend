@@ -22,7 +22,8 @@ const Container = styled.div`
 	background-image: url(${(props) => props.url});
 	background-size: cover;
 	border-radius: 50%;
-	border: 1px solid ${(props) => props.theme.gray};
+  border: 1px solid ${(props) => props.theme.gray};
+  background-color: ${(props) => props.theme.bgLightGreyColor};
 `;
 
 const Avatar = ({ size = "sm", url, className }) => (

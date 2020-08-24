@@ -4,13 +4,13 @@ import { Route, Switch } from "react-router-dom";
 import Auth from "../Routes/Auth";
 import Timeline from "../Routes/Timeline";
 import Search from "../Routes/Search";
-// import Profile from "../Routes/Profile";
+import Profile from "../Routes/Profile";
 
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Timeline} />
     <Route exact path="/search" component={Search} />
-    {/* <Route exact path="/:username" component={Profile} /> */}
+    <Route exact path="/:username" component={Profile} />
   </Switch>
 );
 
