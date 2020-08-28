@@ -6,8 +6,9 @@ import "moment-timezone";
 import "moment/locale/ko";
 import BoldText from "../BoldText";
 import Avatar from "../Avatar";
-import { FullPaw, Paw, Bubble } from "../Icons";
+import { FullPaw, Paw, Bubble, Prev, Next } from "../Icons";
 import TextareaAutosize from "react-autosize-textarea";
+import Indicator from "../Indicator";
 
 const Post = styled.div`
   ${(props) => props.theme.toneBox};
@@ -17,9 +18,6 @@ const Post = styled.div`
   margin-bottom: 30px;
   a {
     color: inherit;
-  }
-  svg {
-    fill: ${(props) => props.theme.pink};
   }
 `;
 
@@ -39,20 +37,26 @@ const Location = styled.span`
   font-size: 12px;
 `;
 
+// -> slide
 const Files = styled.div`
   position: relative;
   padding-bottom: 100%;
   display: flex;
+  z-index: 1;
   flex-direction: column;
   align-items: stretch;
   flex-shrink: 0;
 `;
 
-const File = styled.div`
+const PostFile = styled.div`
   max-width: 100%;
   width: 100%;
   height: 600px;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   top: 0;
   background-image: url(${(props) => props.src});
   background-size: cover;
@@ -60,6 +64,58 @@ const File = styled.div`
   opacity: ${(props) => (props.showing ? 1 : 0)};
   transition: opacity 0.5s linear;
 `;
+
+const ToggleSlide = styled.div`
+  width: 100%;
+  display: flex;
+  margin-top: 290px;
+  margin-bottom: 230px;
+`;
+
+const PrevButton = styled.div`
+  z-index: 2;
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const PrevAction = styled.div`
+  cursor: pointer;
+  margin-left: 10px;
+  svg {
+    fill: rgba(256, 256, 256, 1);
+  }
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+`;
+
+const NextButton = styled.div`
+  z-index: 2;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const NextAction = styled.div`
+  cursor: pointer;
+  margin-right: 10px;
+  svg {
+    fill: rgba(256, 256, 256, 1);
+  }
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+`;
+
+const SlideIndicator = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+// <- slide
 
 const Button = styled.span`
   cursor: pointer;
@@ -76,6 +132,9 @@ const Buttons = styled.div`
 
 const Meta = styled.div`
   padding: 20px;
+  svg {
+    fill: ${(props) => props.theme.pink};
+  }
 `;
 
 const Caption = styled.div`
@@ -121,85 +180,107 @@ const Comment = styled.li`
   }
 `;
 
-export default ({
-  user: { username, avatar },
-  location,
-  files,
-  isLiked,
-  likeCount,
-  createdAt,
-  caption,
-  currentItem,
-  newComment,
-  onKeyPress,
-  comments,
-  selfComments,
-  toggleLike
-}) => (
-  <Post>
-    <Header>
-      <Avatar size="sm" url={avatar} />
-      <UserColumn>
-        <Link to={`/${username}`}>
-          <BoldText text={username} />
-        </Link>
-        <Location>{location}</Location>
-      </UserColumn>
-    </Header>
-    <Files>
-      {files &&
-        files.map((file, index) => (
-          <File
-            key={file.id}
-            id={file.id}
-            src={file.url}
-            showing={index === currentItem}
-          />
-        ))}
-    </Files>
-    <Meta>
-      <Buttons>
-        <Button onClick={toggleLike}>{isLiked ? <FullPaw /> : <Paw />}</Button>
-        <Button>
-          <Bubble />
-        </Button>
-      </Buttons>
-      <BoldText text={likeCount === 1 ? "1 paw" : `${likeCount} paws`} />
-      <Caption>
-        <Link to={`/${username}`}>
-          <BoldText text={username} />
-        </Link>{" "}
-        {caption}
-      </Caption>
-      <Timestamp>
-        <Moment fromNow>{createdAt}</Moment>
-      </Timestamp>
-      {comments && (
-        <Comments>
-          {comments.map((comment) => (
-            <Comment key={comment.id}>
-              <Link to={`/${username}`}>
-                <CommentUser text={comment.user.username} />
-              </Link>
-              {comment.text}
-            </Comment>
+export default (props) => {
+  // console.log(props);
+  const filesLength = props.files.length;
+  return (
+    <Post>
+      <Header>
+        <Avatar size="sm" url={props.user.avatar} />
+        <UserColumn>
+          <Link to={`/${props.user.username}`}>
+            <BoldText text={props.user.username} />
+          </Link>
+          <Location>{props.location}</Location>
+        </UserColumn>
+      </Header>
+      <Files>
+        {props.files &&
+          props.files.map((file, index) => (
+            <PostFile
+              key={file.id}
+              src={file.url}
+              showing={index === props.currentItem}
+            >
+              {filesLength > 1 && (
+                <ToggleSlide>
+                  {props.currentItem !== 0 ? (
+                    <PrevButton>
+                      <PrevAction onClick={() => props.nextSlideFn()}>
+                        <Prev />
+                      </PrevAction>
+                    </PrevButton>
+                  ) : (
+                    <PrevButton />
+                  )}
+                  {props.currentItem + 1 !== filesLength ? (
+                    <NextButton>
+                      <NextAction onClick={() => props.nextSlideFn()}>
+                        <Next />
+                      </NextAction>
+                    </NextButton>
+                  ) : (
+                    <NextButton />
+                  )}
+                </ToggleSlide>
+              )}
+              <SlideIndicator>
+                <Indicator
+                  countArray={props.files}
+                  currentItem={props.currentItem}
+                />
+              </SlideIndicator>
+            </PostFile>
           ))}
-          {selfComments.map((comment) => (
-            <Comment key={comment.id}>
-              <Link to={`/${username}`}>
-                <CommentUser text={comment.user.username} />
-              </Link>
-              {comment.text}
-            </Comment>
-          ))}
-        </Comments>
-      )}
-    </Meta>
-    <Textarea
-      placeholder={"댓글을 달아주세요 :-)"}
-      value={newComment.value}
-      onChange={newComment.onChange}
-      onKeyPress={onKeyPress}
-    />
-  </Post>
-);
+      </Files>
+      <Meta>
+        <Buttons>
+          <Button onClick={props.toggleLike}>
+            {props.isLiked ? <FullPaw /> : <Paw />}
+          </Button>
+          <Button>
+            <Bubble />
+          </Button>
+        </Buttons>
+        <BoldText
+          text={props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`}
+        />
+        <Caption>
+          <Link to={`/${props.username}`}>
+            <BoldText text={props.user.username} />
+          </Link>{" "}
+          {props.caption}
+        </Caption>
+        <Timestamp>
+          <Moment fromNow>{props.createdAt}</Moment>
+        </Timestamp>
+        {props.comments && (
+          <Comments>
+            {props.comments.map((comment) => (
+              <Comment key={comment.id}>
+                <Link to={`/${props.username}`}>
+                  <CommentUser text={comment.user.username} />
+                </Link>
+                {comment.text}
+              </Comment>
+            ))}
+            {props.selfComments.map((comment) => (
+              <Comment key={comment.id}>
+                <Link to={`/${props.username}`}>
+                  <CommentUser text={comment.user.username} />
+                </Link>
+                {comment.text}
+              </Comment>
+            ))}
+          </Comments>
+        )}
+      </Meta>
+      <Textarea
+        placeholder={"댓글을 달아주세요 :-)"}
+        value={props.newComment.value}
+        onChange={props.newComment.onChange}
+        onKeyPress={props.onKeyPress}
+      />
+    </Post>
+  );
+};

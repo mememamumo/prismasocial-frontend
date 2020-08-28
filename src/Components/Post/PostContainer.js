@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
@@ -31,17 +31,14 @@ const PostContainer = ({
     variables: { postId: id }
   });
 
-  const slider = () => {
+  const slide = () => {
     const totalFiles = files.length;
     if (currentItem === totalFiles - 1) {
-      setTimeout(() => setCurrentItem(0), 3000);
+      setCurrentItem(0);
     } else {
-      setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+      setCurrentItem(currentItem + 1);
     }
   };
-  useEffect(() => {
-    slider();
-  });
 
   const onKeyPress = async (e) => {
     const { which } = e;
@@ -88,6 +85,7 @@ const PostContainer = ({
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
       currentItem={currentItem}
+      nextSlideFn={slide}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
       toggleLike={toggleLike}
