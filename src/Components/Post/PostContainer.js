@@ -54,7 +54,7 @@ const PostContainer = ({
         comment.setValue("");
       } catch (error) {
         console.log(error);
-        toast.error("😂 댓글을 달 수 없습니다.");
+        toast.error("일시적인 오류입니다. 다시 시도해 주세요.😂");
       }
     }
   };

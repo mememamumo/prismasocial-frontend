@@ -50,12 +50,19 @@ export default ({
             <title>Log In | Prismasocial</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"Email"} {...email} required type="email" />
+            <Input
+              placeholder={"Email"}
+              value={email.value}
+              onChange={email.onChange}
+              type="email"
+              required
+            />
             <Input
               placeholder={"Password"}
-              {...password}
-              required
+              value={password.value}
+              onChange={password.onChange}
               type="password"
+              required
             />
             <Button text={"Log In"} />
           </form>
@@ -67,22 +74,48 @@ export default ({
             <title>Sign Up | Prismasocial</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"Email"} {...email} required type="email" />
+            <Input
+              placeholder={"Email"}
+              value={email.value}
+              onChange={email.onChange}
+              type="email"
+              required
+            />
             <Input
               placeholder={"Password"}
-              {...password}
-              required
+              value={password.value}
+              onChange={password.onChange}
               type="password"
+              required
             />
             <Input
               placeholder={"Confirm your Password"}
-              {...confirmPassword}
-              required
+              value={confirmPassword.value}
+              onChange={confirmPassword.onChange}
               type="password"
+              required
             />
-            <Input placeholder={"First name"} required {...firstName} />
-            <Input placeholder={"Last name"} required {...lastName} />
-            <Input placeholder={"Username"} required {...username} />
+            <Input
+              placeholder={"First name"}
+              value={firstName.value}
+              onChange={firstName.onChange}
+              type="text"
+              required
+            />
+            <Input
+              placeholder={"Last name"}
+              value={lastName.value}
+              onChange={lastName.onChange}
+              type="text"
+              required
+            />
+            <Input
+              placeholder={"Username"}
+              value={username.value}
+              onChange={username.onChange}
+              type="text"
+              required
+            />
             <Button text={"Sign Up"} />
           </form>
         </>
@@ -93,7 +126,12 @@ export default ({
             <title>Confirm Secret | Prismasocial</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder="비밀키를 입력해주세요." required {...secret} />
+            <Input
+              placeholder="비밀키를 입력해주세요."
+              value={secret.value}
+              onChange={secret.onChange}
+              required
+            />
             <Button text={"Confirm"} />
           </form>
         </>

@@ -83,9 +83,9 @@ export default () => {
             data: { createAccount }
           } = await createAccountMutation();
           if (!createAccount) {
-            toast.error("😂계정을 생성할 수 없습니다.");
+            toast.error("계정을 생성할 수 없습니다 😂");
           } else {
-            toast.success("🥳 계정이 생성되었습니다. 지금 로그인 하세요.");
+            toast.success("계정이 생성되었습니다. 지금 로그인 하세요 🥳");
             setTimeout(() => setAction("logIn"), 3000);
           }
         } catch (e) {
