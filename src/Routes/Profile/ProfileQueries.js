@@ -10,7 +10,23 @@ export const GET_USER = gql`
       isFollowing
       isSelf
       bio
+      following {
+        id
+        isSelf
+        username
+        bio
+        isFollowing
+        avatar
+      }
       followingCount
+      followers {
+        id
+        isSelf
+        username
+        bio
+        isFollowing
+        avatar
+      }
       followersCount
       postsCount
       posts {

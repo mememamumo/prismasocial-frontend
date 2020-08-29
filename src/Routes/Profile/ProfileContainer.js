@@ -1,55 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom/";
-import { useQuery, useMutation } from "react-apollo-hooks";
-import { GET_USER, LOG_OUT } from "./ProfileQueries";
+import { useQuery } from "react-apollo-hooks";
+import { GET_USER } from "./ProfileQueries";
 import ProfilePresenter from "./ProfilePresenter";
-import Loader from "../../Components/Loader";
 
-export default withRouter(
+const ProfileContainer = withRouter(
   ({
     match: {
       params: { username }
     }
   }) => {
     const { data, loading } = useQuery(GET_USER, { variables: { username } });
-    const [logOut] = useMutation(LOG_OUT);
-    if (loading === true) {
-      return <Loader />;
-    } else if (!loading && data && data.seeUser) {
-      const {
-        seeUser: {
-          id,
-          username,
-          avatar,
-          fullName,
-          isFollowing,
-          bio,
-          followingCount,
-          followersCount,
-          postsCount,
-          isSelf,
-          posts
-        }
-      } = data;
-      return (
-        <ProfilePresenter
-          id={id}
-          loading={loading}
-          avatar={avatar}
-          username={username}
-          fullName={fullName}
-          isFollowing={isFollowing}
-          isSelf={isSelf}
-          bio={bio}
-          followingCount={followingCount}
-          followersCount={followersCount}
-          postsCount={postsCount}
-          posts={posts}
-          logOut={logOut}
-        />
-      );
-    } else {
-      return null;
-    }
+    const [isOpenFollowers, setIsOpenFollowers] = useState(false);
+    const [isOpenFollowing, setIsOpenFollowing] = useState(false);
+    const [isOpenSetting, setIsOpenSetting] = useState(false);
+
+    const toggleFollowers = () => {
+      if (isOpenFollowers) {
+        setIsOpenFollowers(false);
+      } else {
+        setIsOpenFollowers(true);
+      }
+    };
+
+    const toggleFollowing = () => {
+      if (isOpenFollowing) {
+        setIsOpenFollowing(false);
+      } else {
+        setIsOpenFollowing(true);
+      }
+    };
+
+    const toggleSetting = () => {
+      if (isOpenSetting) {
+        setIsOpenSetting(false);
+      } else {
+        setIsOpenSetting(true);
+      }
+    };
+
+    return (
+      <ProfilePresenter
+        loading={loading}
+        data={data}
+        isOpenFollowers={isOpenFollowers}
+        isOpenFollowing={isOpenFollowing}
+        isOpenSetting={isOpenSetting}
+        toggleFollowers={toggleFollowers}
+        toggleFollowing={toggleFollowing}
+        toggleSetting={toggleSetting}
+      />
+    );
   }
 );
+
+export default ProfileContainer;

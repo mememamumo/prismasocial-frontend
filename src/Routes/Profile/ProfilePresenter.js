@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
@@ -7,9 +8,17 @@ import BoldText from "../../Components/BoldText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
+import { More } from "../../Components/Icons";
 
 const Wrapper = styled.div`
   min-height: 100vh;
+`;
+
+const ProfileBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Header = styled.header`
@@ -18,7 +27,7 @@ const Header = styled.header`
   justify-content: space-around;
   width: 80%;
   margin: 0 auto;
-  margin-bottom: 44px;
+  margin-bottom: 60px;
 `;
 
 const Picture = styled.div`
@@ -47,21 +56,24 @@ const EFollowButton = styled(FollowButton)`
   margin-top: 0;
 `;
 
-const EButton = styled(Button)`
-  padding: 5px 10px;
-  background-color: ${(props) => props.theme.bgPinkColor};
-`;
-
 const Counts = styled.ul`
   display: flex;
   margin: 15px 0;
 `;
 
-const Count = styled.li`
-  font-size: 16px;
-  &:not(:last-child) {
-    margin-right: 24px;
-  }
+const PostCount = styled.li`
+  margin-right: 24px;
+`;
+const FollowersCount = styled.li`
+  cursor: pointer;
+  margin-right: 24px;
+`;
+const FollowingsCount = styled.li`
+  cursor: pointer;
+`;
+
+const Count = styled.div`
+  font-size: 17px;
 `;
 
 const FullName = styled(BoldText)`
@@ -73,82 +85,88 @@ const Bio = styled.p`
   line-height: 1.2;
 `;
 
-const Posts = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
-  grid-template-rows: 230px;
-  grid-auto-rows: 230px;
-`;
+const Posts = styled.div``;
+
+const Setting = styled.div``;
 
 const ProfilePresenter = ({
   loading,
-  id,
-  avatar,
-  username,
-  fullName,
-  isFollowing,
-  isSelf,
-  bio,
-  posts,
-  followingCount,
-  followersCount,
-  postsCount,
-  logOut
+  data,
+  isOpenFollowers,
+  isOpenFollowing,
+  isOpenSetting,
+  toggleFollowers,
+  toggleFollowing,
+  toggleSetting
 }) => {
-  if (loading === true) {
-    return (
-      <Wrapper>
+  // console.log(seeUser); //undefined
+  console.log(data);
+  return (
+    <Wrapper>
+      {loading ? (
         <Loader />
-      </Wrapper>
-    );
-  } else {
-    return (
-      <Wrapper>
-        <Helmet>
-          <title>{username} | Prismasocial</title>
-        </Helmet>
-        <Header>
-          <Picture>
-            <Avatar size="lg" url={avatar} />
-          </Picture>
-          <HeaderColumn>
-            <UsernameRow>
-              <Username>{username}</Username>
-              {isSelf ? (
-                <EButton onClick={logOut} text="Log Out" />
-              ) : (
-                <EFollowButton isFollowing={isFollowing} id={id} />
-              )}
-            </UsernameRow>
-            <Counts>
-              <Count>
-                게시물 <BoldText text={String(postsCount)} />
-              </Count>
-              <Count>
-                팔로워 <BoldText text={String(followersCount)} />
-              </Count>
-              <Count>
-                팔로우 <BoldText text={String(followingCount)} />
-              </Count>
-            </Counts>
-            <FullName text={fullName} />
-            <Bio>{bio}</Bio>
-          </HeaderColumn>
-        </Header>
-        <Posts>
-          {posts &&
-            posts.map((post) => (
-              <SquarePost
-                key={post.id}
-                likeCount={post.likeCount}
-                commentCount={post.commentCount}
-                file={post.files[0]}
-              />
-            ))}
-        </Posts>
-      </Wrapper>
-    );
-  }
+      ) : (
+        !loading &&
+        data.seeUser &&
+        data.seeUser.posts && (
+          <ProfileBox>
+            <Helmet>
+              <title>{data.seeUser.username} | Prismasocial</title>
+            </Helmet>
+            <Header>
+              <Picture>
+                <Avatar size="lg" url={data.seeUser.avatar} />
+              </Picture>
+              <HeaderColumn>
+                <UsernameRow>
+                  <Username>{data.seeUser.username}</Username>
+                  {data.seeUser.isSelf ? (
+                    <Setting onClick={toggleSetting}>
+                      <More />
+                    </Setting>
+                  ) : (
+                    <EFollowButton
+                      id={data.seeUser.id}
+                      isFollowing={data.seeUser.isFollowing}
+                    />
+                  )}
+                </UsernameRow>
+                <Counts>
+                  <PostCount>
+                    <Count>
+                      게시물 <BoldText text={String(data.seeUser.postsCount)} />
+                    </Count>
+                  </PostCount>
+                  <FollowersCount onClick={toggleFollowers}>
+                    <Count>
+                      팔로워{" "}
+                      <BoldText text={String(data.seeUser.followersCount)} />
+                    </Count>
+                  </FollowersCount>
+                  <FollowingsCount onClick={toggleFollowing}>
+                    <Count>
+                      팔로우{" "}
+                      <BoldText text={String(data.seeUser.followingCount)} />
+                    </Count>
+                  </FollowingsCount>
+                </Counts>
+                <FullName text={data.seeUser.fullName} />
+                <Bio>{data.seeUser.bio}</Bio>
+              </HeaderColumn>
+            </Header>
+            <Posts>
+              <SquarePost postArray={data.seeUser.posts} />
+            </Posts>
+          </ProfileBox>
+        )
+      )}
+    </Wrapper>
+  );
+};
+
+ProfilePresenter.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  data: PropTypes.object
 };
 
 export default ProfilePresenter;
