@@ -6,6 +6,15 @@ import BoldText from "./BoldText";
 import { Link } from "react-router-dom";
 import FollowButton from "./FollowButton";
 
+const GridContainer = styled.div`
+  margin-bottom: 36px;
+  display: grid;
+  grid-gap: 2%;
+  grid-template-columns: repeat(5, 18.5%);
+  grid-template-rows: 170px;
+  grid-auto-rows: 170px;
+`;
+
 const Card = styled.div`
   ${(props) => props.theme.toneBox};
   display: flex;
@@ -23,15 +32,36 @@ const ELink = styled(Link)`
   margin-bottom: 10px;
 `;
 
-const UserCard = ({ id, username, isFollowing, url, isSelf }) => (
-  <Card>
-    <EAvatar url={url} size={"md"} />
-    <ELink to={`/${username}`}>
-      <BoldText text={username} />
-    </ELink>
-    {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
-  </Card>
-);
+export default ({ userArray }) => {
+  return (
+    <GridContainer>
+      {userArray.map((user) => {
+        return (
+          <UserCard
+            key={user.id}
+            id={user.id}
+            username={user.username}
+            isFollowing={user.isFollowing}
+            isSelf={user.isSelf}
+            url={user.avatar}
+          />
+        );
+      })}
+    </GridContainer>
+  );
+};
+
+const UserCard = ({ id, username, isFollowing, url, isSelf }) => {
+  return (
+    <Card>
+      <EAvatar url={url} size={"md"} />
+      <ELink to={`/${username}`}>
+        <BoldText text={username} />
+      </ELink>
+      {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
+    </Card>
+  );
+};
 
 UserCard.propTypes = {
   id: PropTypes.string.isRequired,
@@ -40,5 +70,3 @@ UserCard.propTypes = {
   url: PropTypes.string.isRequired,
   isSelf: PropTypes.bool.isRequired
 };
-
-export default UserCard;
