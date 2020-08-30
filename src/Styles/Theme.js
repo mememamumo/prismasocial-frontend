@@ -10,6 +10,7 @@ export default {
   bgGrayColor: "#C9C9C9",
   bgLightGreyColor: "#f6f6f6",
   blue: "#003589",
+  opacityBlue: "rgba(1, 54, 137, 0.1)",
   deepBlue: "#253167",
   lightBlue: "#0446E3",
   pink: "#EE719E",

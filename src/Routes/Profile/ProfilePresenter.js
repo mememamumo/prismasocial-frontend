@@ -7,7 +7,7 @@ import Avatar from "../../Components/Avatar";
 import BoldText from "../../Components/BoldText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
-import Button from "../../Components/Button";
+import PopUp from "../../Components/PopUp";
 import { More } from "../../Components/Icons";
 
 const Wrapper = styled.div`
@@ -53,7 +53,7 @@ const Username = styled.span`
 `;
 
 const EFollowButton = styled(FollowButton)`
-  margin-top: 0;
+  margin: 0;
 `;
 
 const Counts = styled.ul`
@@ -87,7 +87,18 @@ const Bio = styled.p`
 
 const Posts = styled.div``;
 
-const Setting = styled.div``;
+const Setting = styled.div`
+  cursor: pointer;
+  svg {
+    fill: ${(props) => props.theme.blue};
+    opacity: 0.6;
+  }
+  &:hover {
+    svg {
+      opacity: 1;
+    }
+  }
+`;
 
 const ProfilePresenter = ({
   loading,
@@ -100,7 +111,7 @@ const ProfilePresenter = ({
   toggleSetting
 }) => {
   // console.log(seeUser); //undefined
-  console.log(data);
+  // console.log(data);
   return (
     <Wrapper>
       {loading ? (
@@ -159,6 +170,25 @@ const ProfilePresenter = ({
             </Posts>
           </ProfileBox>
         )
+      )}
+      {isOpenFollowers && (
+        <PopUp
+          title={"Followers"}
+          kind={"FOLLOW"}
+          togglePopFn={toggleFollowers}
+          data={data.seeUser.followers}
+        />
+      )}
+      {isOpenFollowing && (
+        <PopUp
+          title={"Following"}
+          kind={"FOLLOW"}
+          togglePopFn={toggleFollowing}
+          data={data.seeUser.following}
+        />
+      )}
+      {isOpenSetting && (
+        <PopUp title={"Setting"} kind={"SETTING"} togglePopFn={toggleSetting} />
       )}
     </Wrapper>
   );
