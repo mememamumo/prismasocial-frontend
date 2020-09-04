@@ -181,7 +181,7 @@ const Comment = styled.li`
 `;
 
 export default (props) => {
-  // console.log(props);
+  // console.log("PostPresenter", props);
   const filesLength = props.files.length;
   return (
     <Post>
@@ -224,12 +224,14 @@ export default (props) => {
                   )}
                 </ToggleSlide>
               )}
-              <SlideIndicator>
-                <Indicator
-                  countArray={props.files}
-                  currentItem={props.currentItem}
-                />
-              </SlideIndicator>
+              {filesLength > 1 && (
+                <SlideIndicator>
+                  <Indicator
+                    countArray={props.files}
+                    currentItem={props.currentItem}
+                  />
+                </SlideIndicator>
+              )}
             </PostFile>
           ))}
       </Files>

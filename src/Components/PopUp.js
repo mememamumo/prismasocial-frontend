@@ -152,8 +152,8 @@ const ButtonField = styled.div`
 `;
 
 const EFollowButton = styled(FollowButton)`
-  margin: 3px 0 0 0;
-  padding: 2px 6px;
+  margin: 5px 0 0 0;
+  padding: 4px 6px;
 `;
 
 const TypeNameField = styled(NameField)`
@@ -234,7 +234,7 @@ const PopUp = ({ togglePopFn, kind, title, data, postId }) => {
                 <UserRow key={user.id}>
                   <AvatarField>
                     <Link onClick={togglePopFn} to={`${user.username}`}>
-                      <Avatar size="sm" url={user.avatar} />
+                      <Avatar size="md" url={user.avatar} />
                     </Link>
                   </AvatarField>
                   <InfoField>

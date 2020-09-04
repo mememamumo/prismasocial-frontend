@@ -1,26 +1,33 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import useInput from "../../Hooks/useInput";
-import PostPresenter from "./PostPresenter";
 import { useMutation } from "react-apollo-hooks";
-import { ADD_COMMENT, TOGGLE_LIKE } from "./PostQueries";
+import SeePostPresenter from "./SeePostPresenter";
+import { TOGGLE_LIKE, ADD_COMMENT } from "../../Components/Post/PostQueries";
 import { toast } from "react-toastify";
+import useInput from "../../Hooks/useInput";
 
-const PostContainer = ({
-  id,
-  user,
-  files,
-  likeCount,
-  isLiked,
-  comments,
-  caption,
-  location,
-  createdAt
+const SeePostContainer = ({
+  post: {
+    seeFullPost: {
+      id,
+      user,
+      files,
+      likeCount,
+      isLiked,
+      comments,
+      caption,
+      location,
+      createdAt
+    }
+  }
 }) => {
+  // console.log("SeePostContainer: id:", id);
+  // console.log("length", files.length);
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
+  const [isOpenLikes, setIsOpenLikes] = useState(false);
   const comment = useInput("");
 
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
@@ -30,6 +37,14 @@ const PostContainer = ({
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }
   });
+
+  const handleIsOpen = () => {
+    if (isOpenLikes) {
+      setIsOpenLikes(false);
+    } else {
+      setIsOpenLikes(true);
+    }
+  };
 
   const slide = () => {
     const totalFiles = files.length;
@@ -77,56 +92,32 @@ const PostContainer = ({
   };
 
   return (
-    <PostPresenter
+    <SeePostPresenter
       id={id}
       user={user}
       files={files}
       likeCount={likeCountS}
-      caption={caption}
-      location={location}
       isLiked={isLikedS}
       comments={comments}
+      caption={caption}
+      location={location}
       createdAt={createdAt}
       newComment={comment}
+      selfComments={selfComments}
       setIsLiked={setIsLiked}
       setLikeCount={setLikeCount}
       currentItem={currentItem}
       nextSlideFn={slide}
       onKeyPress={onKeyPress}
-      selfComments={selfComments}
       toggleLike={toggleLike}
+      isOpenLikes={isOpenLikes}
+      handleIsOpen={handleIsOpen}
     />
   );
 };
 
-PostContainer.propTypes = {
-  id: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    avatar: PropTypes.string,
-    username: PropTypes.string.isRequired
-  }).isRequired,
-  files: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  likeCount: PropTypes.number.isRequired,
-  isLiked: PropTypes.bool.isRequired,
-  comments: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      user: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired
-      })
-    })
-  ).isRequired,
-  createdAt: PropTypes.string,
-  caption: PropTypes.string.isRequired,
-  location: PropTypes.string
+SeePostContainer.propTypes = {
+  post: PropTypes.object.isRequired
 };
 
-export default PostContainer;
+export default SeePostContainer;

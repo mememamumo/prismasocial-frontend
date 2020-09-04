@@ -5,12 +5,14 @@ import Auth from "../Routes/Auth";
 import Timeline from "../Routes/Timeline";
 import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
+import SeePost from "../Routes/SeePost";
 
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Timeline} />
     <Route exact path="/search" component={Search} />
     <Route exact path="/:username" component={Profile} />
+    <Route exact path="/post/:postId" component={SeePost} />
     <Redirect from="*" to="/" />
   </Switch>
 );
