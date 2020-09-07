@@ -9,6 +9,7 @@ export const SEE_POST = gql`
         username
         avatar
         isSelf
+        isFollowing
       }
       location
       caption

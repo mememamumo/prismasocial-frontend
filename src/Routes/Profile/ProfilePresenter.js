@@ -126,7 +126,11 @@ const ProfilePresenter = ({
             </Helmet>
             <Header>
               <Picture>
-                <Avatar size="lg" url={data.seeUser.avatar} />
+                <Avatar
+                  size="lg"
+                  url={data.seeUser.avatar}
+                  username={data.seeUser.username}
+                />
               </Picture>
               <HeaderColumn>
                 <UsernameRow>

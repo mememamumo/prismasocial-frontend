@@ -234,7 +234,11 @@ const PopUp = ({ togglePopFn, kind, title, data, postId }) => {
                 <UserRow key={user.id}>
                   <AvatarField>
                     <Link onClick={togglePopFn} to={`${user.username}`}>
-                      <Avatar size="md" url={user.avatar} />
+                      <Avatar
+                        size="md"
+                        url={user.avatar}
+                        username={user.username}
+                      />
                     </Link>
                   </AvatarField>
                   <InfoField>

@@ -9,40 +9,33 @@ import "moment/locale/ko";
 import Indicator from "../../Components/Indicator";
 import PopUp from "../../Components/PopUp";
 import BoldText from "../../Components/BoldText";
+import Comments from "../../Components/Comments";
+import FollowButton from "../../Components/FollowButton";
 import { Paw, Bubble, FullPaw, Prev, Next } from "../../Components/Icons";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
 const PostBox = styled.div`
+  display: flex;
   ${(props) => props.theme.toneBox};
   width: 100%;
-  max-width: 600px;
+  height: 600px;
   user-select: none;
-  margin-bottom: 30px;
   a {
     color: inherit;
   }
 `;
 
-const Header = styled.header`
-  padding: 20px;
-  display: flex;
-  align-items: center;
-`;
-
-const UserColumn = styled.div`
-  margin-left: 10px;
-`;
-
-const Location = styled.span`
-  display: block;
-  margin-top: 5px;
-  font-size: 12px;
-`;
-
 // -> slide
 const Files = styled.div`
   position: relative;
+  width: 600px;
   padding-bottom: 100%;
   display: flex;
   z-index: 1;
@@ -52,8 +45,7 @@ const Files = styled.div`
 `;
 
 const PostFile = styled.div`
-  max-width: 100%;
-  width: 100%;
+  width: 600px;
   height: 600px;
   position: absolute;
   display: flex;
@@ -120,62 +112,149 @@ const SlideIndicator = styled.div`
 `;
 // <- slide
 
-const Button = styled.span`
-  cursor: pointer;
+const MetaContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 `;
 
-const Buttons = styled.div`
+const MetaHeader = styled.div`
+  width: 100%;
+  height: 72px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid ${(props) => props.theme.opacityBlue};
+`;
+
+const Username = styled.span`
+  margin-left: 10px;
+`;
+
+const EFollowButton = styled(FollowButton)`
+  display: flex;
+  margin: 0;
+  margin-left: 15px;
+  margin-top: 3px;
+  padding: 3px 6px;
+`;
+
+const Location = styled.span`
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+`;
+
+const MetaCaption = styled.div`
+  width: 100%;
+  min-height: 90px;
+  padding: 15px 16px;
+  display: flex;
+  align-items: flex-start;
+`;
+
+const AvatarRow = styled.div`
+  display: flex;
+`;
+
+const CaptionRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const UserColumn = styled.div`
+  margin-left: 10px;
+`;
+
+const Row = styled.div`
+  width: 100%;
+`;
+
+const Caption = styled.div`
+  margin: 10px 0;
+  line-height: 1.2;
+  margin-left: 10px;
+`;
+
+const Timestamp = styled.span`
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 10px;
+`;
+
+const MetaComment = styled.div`
+  width: 100%;
+  height: 270px;
+  display: flex;
+  // scoll bar
+  overflow-y: scroll;
+  // -ms-overflw-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  //
+  flex-direction: column;
+  border-bottom: 1px solid ${(props) => props.theme.opacityBlue};
+`;
+
+const MetaAction = styled.div`
+  width: 100%;
+  margin-bottom: 13px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Button = styled.span`
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  align-items: center;
+`;
+
+const ActionSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  width: 100%;
+  min-height: 40px;
   ${Button} {
     &:first-child {
       margin-right: 12px;
     }
   }
-  margin-bottom: 10px;
-`;
-
-const MetaContainer = styled.div``;
-
-const MetaHeader = styled.div``;
-
-const MetaCaption = styled.div``;
-
-const MetaComment = styled.div``;
-
-const MetaAction = styled.div``;
-
-const MetaAddComment = styled.div``;
-
-const Username = styled.span``;
-
-const AvatarRow = styled.div``;
-
-const CaptionRow = styled.div``;
-const Row = styled.div``;
-
-const ActionSection = styled.div`
   svg {
     fill: ${(props) => props.theme.pink};
   }
 `;
 
-const LikeSection = styled.div``;
-
-const AddCommentSection = styled.div``;
-
-const Caption = styled.div`
-  margin: 10px 0;
-  line-height: 1.2;
+const MetaAddComment = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
-const Timestamp = styled.span`
-  font-weight: 400;
-  display: block;
-  font-size: 12px;
+const LikeSection = styled.div`
+  margin-bottom: 9px;
+`;
+
+const ETimestamp = styled(Timestamp)`
+  margin-left: 0;
+`;
+
+const AddCommentSection = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
 `;
 
 const Textarea = styled(TextareaAutosize)`
   border: none;
   width: 100%;
+  max-height: 80px;
   resize: none;
   font-size: 14px;
   color: ${(props) => props.theme.blue};
@@ -237,24 +316,41 @@ export default (props) => {
         </Files>
         <MetaContainer>
           <MetaHeader>
-            <Avatar size="sm" url={props.user.avatar} />
+            <Avatar
+              size="sm"
+              username={props.user.username}
+              url={props.user.avatar}
+              link={true}
+            />
             <Username>
               <Link to={`/${props.user.username}`}>
                 <BoldText text={props.user.username} />
               </Link>
             </Username>
+            {props.user.isSelf ? null : (
+              <EFollowButton
+                id={props.id}
+                isFollowing={props.user.isFollowing}
+              />
+            )}
           </MetaHeader>
           <MetaCaption>
             <AvatarRow>
-              <Avatar size="sm" url={props.user.avatar} />
+              <Avatar
+                size="sm"
+                username={props.user.username}
+                url={props.user.avatar}
+                link={true}
+              />
             </AvatarRow>
             <CaptionRow>
               <Row>
-                <Username>
+                <UserColumn>
                   <Link to={`/${props.user.username}`}>
                     <BoldText text={props.user.username} />
                   </Link>
-                </Username>
+                  <Location>{props.location}</Location>
+                </UserColumn>
                 <Caption>{props.caption}</Caption>
               </Row>
               <Timestamp>
@@ -263,26 +359,8 @@ export default (props) => {
             </CaptionRow>
           </MetaCaption>
           <MetaComment>
-            {/* {props.comments && (
-              <Comments>
-                {props.comments.map((comment) => (
-                  <Comment key={comment.id}>
-                    <Link to={`/${props.user.username}`}>
-                      <CommentUser text={comment.user.username} />
-                    </Link>
-                    {comment.text}
-                  </Comment>
-                ))}
-                {props.selfComments.map((comment) => (
-                  <Comment key={comment.id}>
-                    <Link to={`/${props.username}`}>
-                      <CommentUser text={comment.user.username} />
-                    </Link>
-                    {comment.text}
-                  </Comment>
-                ))}
-              </Comments>
-            )} */}
+            <Comments commentsArray={props.comments} avatar={true} />
+            <Comments commentsArray={props.selfComments} avatar={true} />
           </MetaComment>
           <MetaAction>
             <ActionSection>
@@ -301,9 +379,9 @@ export default (props) => {
                 onClick={props.handleIsOpen}
               ></BoldText>
             </LikeSection>
-            <Timestamp>
-              <Moment fromNow>{props.createdAt}</Moment>
-            </Timestamp>
+            <ETimestamp>
+              <Moment format="YYYY/MM/DD">{props.createdAt}</Moment>
+            </ETimestamp>
           </MetaAction>
           <MetaAddComment>
             <AddCommentSection>

@@ -181,12 +181,17 @@ const Comment = styled.li`
 `;
 
 export default (props) => {
-  // console.log("PostPresenter", props);
+  console.log("PostPresenter", props);
   const filesLength = props.files.length;
   return (
     <Post>
       <Header>
-        <Avatar size="sm" url={props.user.avatar} />
+        <Avatar
+          size="sm"
+          url={props.user.avatar}
+          username={props.user.username}
+          link={true}
+        />
         <UserColumn>
           <Link to={`/${props.user.username}`}>
             <BoldText text={props.user.username} />
@@ -248,7 +253,7 @@ export default (props) => {
           text={props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`}
         />
         <Caption>
-          <Link to={`/${props.username}`}>
+          <Link to={`/${props.user.username}`}>
             <BoldText text={props.user.username} />
           </Link>{" "}
           {props.caption}
@@ -260,7 +265,7 @@ export default (props) => {
           <Comments>
             {props.comments.map((comment) => (
               <Comment key={comment.id}>
-                <Link to={`/${props.username}`}>
+                <Link to={`/${comment.user.username}`}>
                   <CommentUser text={comment.user.username} />
                 </Link>
                 {comment.text}
@@ -268,7 +273,7 @@ export default (props) => {
             ))}
             {props.selfComments.map((comment) => (
               <Comment key={comment.id}>
-                <Link to={`/${props.username}`}>
+                <Link to={`/${comment.user.username}`}>
                   <CommentUser text={comment.user.username} />
                 </Link>
                 {comment.text}

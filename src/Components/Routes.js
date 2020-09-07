@@ -11,8 +11,8 @@ const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Timeline} />
     <Route exact path="/search" component={Search} />
-    <Route exact path="/:username" component={Profile} />
     <Route exact path="/post/:postId" component={SeePost} />
+    <Route exact path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>
 );

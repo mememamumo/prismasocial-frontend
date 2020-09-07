@@ -36,6 +36,7 @@ const HeaderColumn = styled.div`
   }
   &:last-child {
     margin-left: auto;
+    margin-right: 30px;
     text-align: right;
     display: flex;
     justify-content: flex-end;
@@ -63,6 +64,7 @@ export default withRouter(({ history }) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
+  // console.log(data);
   return (
     !loading && (
       <Header>
@@ -90,9 +92,12 @@ export default withRouter(({ history }) => {
               <Paw size={28} />
             </HeaderLink>
             {data.me !== undefined && (
-              <HeaderLink to={data.me ? data.me.username : "/#"}>
-                <EAvatar url={data.me && data.me.avatar} size="sm" />
-              </HeaderLink>
+              <EAvatar
+                url={data.me.avatar}
+                size="sm"
+                link={true}
+                username={data.me.username}
+              />
             )}
           </HeaderColumn>
         </HeaderWrapper>
