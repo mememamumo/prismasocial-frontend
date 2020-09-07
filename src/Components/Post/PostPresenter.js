@@ -9,6 +9,7 @@ import Avatar from "../Avatar";
 import { FullPaw, Paw, Bubble, Prev, Next } from "../Icons";
 import TextareaAutosize from "react-autosize-textarea";
 import Indicator from "../Indicator";
+import Comments from "../../Components/Comments";
 
 const Post = styled.div`
   ${(props) => props.theme.toneBox};
@@ -163,26 +164,19 @@ const Textarea = styled(TextareaAutosize)`
   }
 `;
 
-const Comments = styled.ul``;
-
-const CommentUser = styled(BoldText)`
-  margin-right: 5px;
-`;
-
-const Comment = styled.li`
-  margin-bottom: 3px;
-  line-height: 1.2;
-  &:first-child {
-    margin-top: 13px;
-  }
-  &:last-child {
-    margin-bottom: 0;
-  }
+const CommentsWrap = styled.div`
+  padding: 16px 0 0;
 `;
 
 export default (props) => {
-  console.log("PostPresenter", props);
+  // console.log("PostPresenter", props);
   const filesLength = props.files.length;
+  const shortComment = [];
+  let makeCommentsArray = props.comments;
+  if (props.comments.length > 3) {
+    shortComment.push(makeCommentsArray[0]);
+    makeCommentsArray = shortComment;
+  }
   return (
     <Post>
       <Header>
@@ -246,7 +240,9 @@ export default (props) => {
             {props.isLiked ? <FullPaw /> : <Paw />}
           </Button>
           <Button>
-            <Bubble />
+            <Link to={`/post/${props.id}`}>
+              <Bubble />
+            </Link>
           </Button>
         </Buttons>
         <BoldText
@@ -261,26 +257,23 @@ export default (props) => {
         <Timestamp>
           <Moment fromNow>{props.createdAt}</Moment>
         </Timestamp>
-        {props.comments && (
-          <Comments>
-            {props.comments.map((comment) => (
-              <Comment key={comment.id}>
-                <Link to={`/${comment.user.username}`}>
-                  <CommentUser text={comment.user.username} />
-                </Link>
-                {comment.text}
-              </Comment>
-            ))}
-            {props.selfComments.map((comment) => (
-              <Comment key={comment.id}>
-                <Link to={`/${comment.user.username}`}>
-                  <CommentUser text={comment.user.username} />
-                </Link>
-                {comment.text}
-              </Comment>
-            ))}
-          </Comments>
+        {props.comments.length > 3 ? (
+          <CommentsWrap>
+            <Comments commentsArray={makeCommentsArray} />
+            <Link to={`/post/${props.id}`}>
+              댓글 {props.comments.length}개 모두 보기
+            </Link>
+          </CommentsWrap>
+        ) : (
+          <CommentsWrap>
+            <Comments commentsArray={makeCommentsArray} />
+          </CommentsWrap>
         )}
+        {props.comments && props.selfComments.length !== 0 ? (
+          <CommentsWrap>
+            <Comments commentsArray={props.selfComments} />
+          </CommentsWrap>
+        ) : null}
       </Meta>
       <Textarea
         placeholder={"댓글을 달아주세요 :-)"}

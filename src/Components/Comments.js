@@ -8,22 +8,28 @@ import "moment/locale/ko";
 import BoldText from "./BoldText";
 import Avatar from "./Avatar";
 
-const CommentContainer = styled.div`
+const CommentContainer = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 5px;
 `;
 
-const CommentWrapper = styled.div`
+const CommentWrapper = styled.li`
   width: 100%;
-  margin-bottom: 3px;
+  // margin-bottom: 3px;
 `;
 const MetaRow = styled.div`
   width: 100%;
-  padding: 10px 16px;
+  padding: 7px 16px;
   display: flex;
   align-items: flex-start;
 `;
+
+const EMetaRow = styled(MetaRow)`
+  padding: 0;
+`;
+
 const AvatarColumn = styled.div``;
 
 const CommentColumn = styled.div`
@@ -31,6 +37,11 @@ const CommentColumn = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 10px;
+  line-height: 1.2;
+`;
+
+const ECommentColumn = styled(CommentColumn)`
+  margin: 0;
 `;
 
 const Wrap = styled.div`
@@ -73,8 +84,6 @@ const Comments = ({ commentsArray, avatar = false }) => {
             <Comment
               key={comment.id}
               id={comment.id}
-              isAvatar={comment.user.avatar}
-              avatar={comment.user.avatar}
               username={comment.user.username}
               text={comment.text}
               createdAt={comment.createdAt}
@@ -124,16 +133,8 @@ const Comment = (props) => {
   } else {
     return (
       <CommentWrapper>
-        <MetaRow>
-          <AvatarColumn>
-            <Avatar
-              size="sm"
-              usernam={props.username}
-              url={props.avatar}
-              link={true}
-            />
-          </AvatarColumn>
-          <CommentColumn>
+        <EMetaRow>
+          <ECommentColumn>
             <Wrap>
               <Username>
                 <Link to={`/${props.username}`}>
@@ -142,11 +143,8 @@ const Comment = (props) => {
               </Username>
               {props.text}
             </Wrap>
-            <Timestamp>
-              <Moment fromNow>{props.createdAt}</Moment>
-            </Timestamp>
-          </CommentColumn>
-        </MetaRow>
+          </ECommentColumn>
+        </EMetaRow>
       </CommentWrapper>
     );
   }
