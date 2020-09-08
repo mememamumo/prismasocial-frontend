@@ -10,6 +10,7 @@ import { FullPaw, Paw, Bubble, Prev, Next } from "../Icons";
 import TextareaAutosize from "react-autosize-textarea";
 import Indicator from "../Indicator";
 import Comments from "../../Components/Comments";
+import SliceText from "../../Components/SliceText";
 
 const Post = styled.div`
   ${(props) => props.theme.toneBox};
@@ -251,8 +252,8 @@ export default (props) => {
         <Caption>
           <Link to={`/${props.user.username}`}>
             <BoldText text={props.user.username} />
-          </Link>{" "}
-          {props.caption}
+          </Link>
+          <SliceText text={props.caption} length={30} />
         </Caption>
         <Timestamp>
           <Moment fromNow>{props.createdAt}</Moment>

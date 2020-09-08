@@ -15,7 +15,8 @@ const PostContainer = ({
   comments,
   caption,
   location,
-  createdAt
+  createdAt,
+  length = 20
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);

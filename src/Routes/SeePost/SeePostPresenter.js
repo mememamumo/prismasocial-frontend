@@ -117,6 +117,7 @@ const MetaContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  position: relative;
 `;
 
 const MetaHeader = styled.div`
@@ -187,17 +188,8 @@ const Timestamp = styled.span`
 
 const MetaComment = styled.div`
   width: 100%;
-  height: 270px;
   display: flex;
-  // scoll bar
-  overflow-y: scroll;
-  // -ms-overflw-style: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  //
   flex-direction: column;
-  border-bottom: 1px solid ${(props) => props.theme.opacityBlue};
 `;
 
 const MetaAction = styled.div`
@@ -206,6 +198,7 @@ const MetaAction = styled.div`
   padding: 0 16px;
   display: flex;
   flex-direction: column;
+  border-top: 1px solid ${(props) => props.theme.opacityBlue};
 `;
 
 const Button = styled.span`
@@ -265,6 +258,25 @@ const Textarea = styled(TextareaAutosize)`
   &::placeholder {
     font-weight: normal;
   }
+`;
+
+const MetaScroll = styled.div`
+  // scoll bar
+  overflow-y: scroll;
+  -ms-overflw-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  //
+  padding-bottom: 150px;
+`;
+
+const MetaBottom = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: ${(props) => props.theme.bgLightGreyColor};
 `;
 
 export default (props) => {
@@ -334,65 +346,69 @@ export default (props) => {
               />
             )}
           </MetaHeader>
-          <MetaCaption>
-            <AvatarRow>
-              <Avatar
-                size="sm"
-                username={props.user.username}
-                url={props.user.avatar}
-                link={true}
-              />
-            </AvatarRow>
-            <CaptionRow>
-              <Row>
-                <UserColumn>
-                  <Link to={`/${props.user.username}`}>
-                    <BoldText text={props.user.username} />
-                  </Link>
-                  <Location>{props.location}</Location>
-                </UserColumn>
-                <Caption>{props.caption}</Caption>
-              </Row>
-              <Timestamp>
-                <Moment fromNow>{props.createdAt}</Moment>
-              </Timestamp>
-            </CaptionRow>
-          </MetaCaption>
-          <MetaComment>
-            <Comments commentsArray={props.comments} avatar={true} />
-            <Comments commentsArray={props.selfComments} avatar={true} />
-          </MetaComment>
-          <MetaAction>
-            <ActionSection>
-              <Button onClick={props.toggleLike}>
-                {props.isLiked ? <FullPaw /> : <Paw />}
-              </Button>
-              <Button>
-                <Bubble />
-              </Button>
-            </ActionSection>
-            <LikeSection>
-              <BoldText
-                text={
-                  props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`
-                }
-                onClick={props.handleIsOpen}
-              ></BoldText>
-            </LikeSection>
-            <ETimestamp>
-              <Moment format="YYYY/MM/DD">{props.createdAt}</Moment>
-            </ETimestamp>
-          </MetaAction>
-          <MetaAddComment>
-            <AddCommentSection>
-              <Textarea
-                placeholder={"댓글을 달아주세요 :-)"}
-                value={props.newComment.value}
-                onChange={props.newComment.onChange}
-                onKeyPress={props.onKeyPress}
-              />
-            </AddCommentSection>
-          </MetaAddComment>
+          <MetaScroll>
+            <MetaCaption>
+              <AvatarRow>
+                <Avatar
+                  size="sm"
+                  username={props.user.username}
+                  url={props.user.avatar}
+                  link={true}
+                />
+              </AvatarRow>
+              <CaptionRow>
+                <Row>
+                  <UserColumn>
+                    <Link to={`/${props.user.username}`}>
+                      <BoldText text={props.user.username} />
+                    </Link>
+                    <Location>{props.location}</Location>
+                  </UserColumn>
+                  <Caption>{props.caption}</Caption>
+                </Row>
+                <Timestamp>
+                  <Moment fromNow>{props.createdAt}</Moment>
+                </Timestamp>
+              </CaptionRow>
+            </MetaCaption>
+            <MetaComment>
+              <Comments commentsArray={props.comments} avatar={true} />
+              <Comments commentsArray={props.selfComments} avatar={true} />
+            </MetaComment>
+          </MetaScroll>
+          <MetaBottom>
+            <MetaAction>
+              <ActionSection>
+                <Button onClick={props.toggleLike}>
+                  {props.isLiked ? <FullPaw /> : <Paw />}
+                </Button>
+                <Button>
+                  <Bubble />
+                </Button>
+              </ActionSection>
+              <LikeSection>
+                <BoldText
+                  text={
+                    props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`
+                  }
+                  onClick={props.handleIsOpen}
+                ></BoldText>
+              </LikeSection>
+              <ETimestamp>
+                <Moment format="YYYY/MM/DD">{props.createdAt}</Moment>
+              </ETimestamp>
+            </MetaAction>
+            <MetaAddComment>
+              <AddCommentSection>
+                <Textarea
+                  placeholder={"댓글을 달아주세요 :-)"}
+                  value={props.newComment.value}
+                  onChange={props.newComment.onChange}
+                  onKeyPress={props.onKeyPress}
+                />
+              </AddCommentSection>
+            </MetaAddComment>
+          </MetaBottom>
         </MetaContainer>
       </PostBox>
       {props.isOpenLikes && (
