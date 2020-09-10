@@ -22,6 +22,7 @@ const PostContainer = ({
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
+  const [isOpenLikes, setIsOpenLikes] = useState(false);
   const comment = useInput("");
 
   const [addCommentMutation] = useMutation(ADD_COMMENT, {
@@ -31,6 +32,14 @@ const PostContainer = ({
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id }
   });
+
+  const handleIsOpen = () => {
+    if (isOpenLikes) {
+      setIsOpenLikes(false);
+    } else {
+      setIsOpenLikes(true);
+    }
+  };
 
   const slide = () => {
     const totalFiles = files.length;
@@ -69,12 +78,6 @@ const PostContainer = ({
       setIsLiked(true);
       setLikeCount(likeCountS + 1);
     }
-    try {
-      toggleLikeMutation();
-    } catch (error) {
-      setIsLiked(!isLikedS);
-      toast.error("일시적인 오류입니다. 다시 시도해주세요.");
-    }
   };
 
   return (
@@ -96,6 +99,8 @@ const PostContainer = ({
       onKeyPress={onKeyPress}
       selfComments={selfComments}
       toggleLike={toggleLike}
+      isOpenLikes={isOpenLikes}
+      handleIsOpen={handleIsOpen}
     />
   );
 };

@@ -83,12 +83,6 @@ const SeePostContainer = ({
       setIsLiked(true);
       setLikeCount(likeCountS + 1);
     }
-    try {
-      toggleLikeMutation();
-    } catch (error) {
-      setIsLiked(!isLikedS);
-      toast.error("일시적인 오류입니다. 다시 시도해주세요.");
-    }
   };
 
   return (

@@ -11,6 +11,7 @@ import TextareaAutosize from "react-autosize-textarea";
 import Indicator from "../Indicator";
 import Comments from "../../Components/Comments";
 import SliceText from "../../Components/SliceText";
+import PopUp from "../../Components/PopUp";
 
 const Post = styled.div`
   ${(props) => props.theme.toneBox};
@@ -169,6 +170,13 @@ const CommentsWrap = styled.div`
   padding: 16px 0 0;
 `;
 
+const LikeSection = styled.div`
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.pink};
+  }
+`;
+
 export default (props) => {
   // console.log("PostPresenter", props);
   const filesLength = props.files.length;
@@ -246,9 +254,11 @@ export default (props) => {
             </Link>
           </Button>
         </Buttons>
-        <BoldText
-          text={props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`}
-        />
+        <LikeSection onClick={props.handleIsOpen}>
+          <BoldText
+            text={props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`}
+          />
+        </LikeSection>
         <Caption>
           <Link to={`/${props.user.username}`}>
             <BoldText text={props.user.username} />
@@ -282,6 +292,14 @@ export default (props) => {
         onChange={props.newComment.onChange}
         onKeyPress={props.onKeyPress}
       />
+      {props.isOpenLikes && (
+        <PopUp
+          title={"Likes"}
+          togglePopFn={props.handleIsOpen}
+          kind={"LIKE"}
+          postId={props.id}
+        />
+      )}
     </Post>
   );
 };

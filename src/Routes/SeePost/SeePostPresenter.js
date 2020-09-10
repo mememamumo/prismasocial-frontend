@@ -232,6 +232,10 @@ const MetaAddComment = styled.div`
 
 const LikeSection = styled.div`
   margin-bottom: 9px;
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.pink};
+  }
 `;
 
 const ETimestamp = styled(Timestamp)`
@@ -280,7 +284,7 @@ const MetaBottom = styled.div`
 `;
 
 export default (props) => {
-  console.log("SeePostPresenter", props);
+  // console.log("SeePostPresenter", props);
   const filesLength = props.files.length;
   return (
     <Wrapper>
@@ -386,12 +390,11 @@ export default (props) => {
                   <Bubble />
                 </Button>
               </ActionSection>
-              <LikeSection>
+              <LikeSection onClick={props.handleIsOpen}>
                 <BoldText
                   text={
                     props.likeCount === 1 ? "1 paw" : `${props.likeCount} paws`
                   }
-                  onClick={props.handleIsOpen}
                 ></BoldText>
               </LikeSection>
               <ETimestamp>

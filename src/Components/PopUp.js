@@ -8,7 +8,7 @@ import { X } from "./Icons";
 import Avatar from "./Avatar";
 import FollowButton from "./FollowButton";
 import Loader from "./Loader";
-// import UserList from "./UserList";
+import UserList from "./UserList";
 
 const PopUpContainer = styled.div`
   position: fixed;
@@ -276,6 +276,18 @@ const PopUp = ({ togglePopFn, kind, title, data, postId }) => {
               </SettingRow>
             </>
           )}
+          {kind === kindEnum[4] ? (
+            whoLikesLoading ? (
+              <UserRow>
+                <Loader />
+              </UserRow>
+            ) : (
+              !whoLikesLoading &&
+              whoLikesData && (
+                <UserList users={whoLikesData.whoLike} filtering={true} />
+              )
+            )
+          ) : null}
         </Main>
       </Box>
     </PopUpContainer>
