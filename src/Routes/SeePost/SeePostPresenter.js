@@ -284,7 +284,7 @@ const MetaBottom = styled.div`
 `;
 
 export default (props) => {
-  // console.log("SeePostPresenter", props);
+  console.log("SeePostPresenter", props);
   const filesLength = props.files.length;
   return (
     <Wrapper>
@@ -345,7 +345,7 @@ export default (props) => {
             </Username>
             {props.user.isSelf ? null : (
               <EFollowButton
-                id={props.id}
+                id={props.user.id}
                 isFollowing={props.user.isFollowing}
               />
             )}

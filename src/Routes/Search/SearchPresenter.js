@@ -10,9 +10,13 @@ const Wrapper = styled.div`
   height: 50vh;
 `;
 
-const Section = styled.div``;
+const Section = styled.div`
+  padding: 15px;
+`;
 
-const PostSection = styled(Section)``;
+const PostSection = styled(Section)`
+  padding: 0 15px 15px;
+`;
 
 const EBoldText = styled(BoldText)`
   margin: 18px 0 0 18px;
