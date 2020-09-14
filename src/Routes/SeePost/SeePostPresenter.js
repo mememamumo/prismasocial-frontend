@@ -122,7 +122,7 @@ const MetaContainer = styled.div`
 
 const MetaHeader = styled.div`
   width: 100%;
-  height: 72px;
+  min-height: 72px;
   padding: 10px 16px;
   display: flex;
   align-items: center;

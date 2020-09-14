@@ -69,6 +69,9 @@ const NotifiContainer = styled.div`
   &:hover {
     background-color: ${(props) => props.theme.opacityBlue};
   }
+  &:first-child {
+    padding: 20px 10px 10px;
+  }
 `;
 
 const EAvatar = styled(Avatar)``;

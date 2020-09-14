@@ -20,7 +20,7 @@ const ContentWrapper = styled.div`
 `;
 
 const UserColumn = styled.div`
-  padding: 15px;
+  padding: 0 15px 15px;
   display: flex;
   flex-direction: column;
 `;
@@ -39,7 +39,7 @@ const MetaAll = styled.span`
 `;
 
 const PostColumn = styled.div`
-  padding: 0 15px 15px;
+  padding: 0 15px 0;
   display: flex;
   flex-direction: column;
 `;
@@ -74,7 +74,7 @@ const ExplorePresenter = ({ data, loading }) => {
               </MetaAll>
             </MetaLine>
           ) : null}
-          <UserCard userArray={hiddenUser} />
+          {users.length === 0 ? null : <UserCard userArray={hiddenUser} />}
         </UserColumn>
         <PostColumn>
           <SquarePost postArray={posts} />

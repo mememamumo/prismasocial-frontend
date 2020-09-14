@@ -32,6 +32,10 @@ const ELink = styled(Link)`
   margin-bottom: 10px;
 `;
 
+const EFollowButton = styled(FollowButton)`
+  min-height: 36px;
+`;
+
 export default ({ userArray }) => {
   return (
     <GridContainer>
@@ -58,7 +62,7 @@ const UserCard = ({ id, username, isFollowing, url, isSelf }) => {
       <ELink to={`/${username}`}>
         <BoldText text={username} />
       </ELink>
-      {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
+      {!isSelf && <EFollowButton id={id} isFollowing={isFollowing} />}
     </Card>
   );
 };
