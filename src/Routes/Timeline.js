@@ -6,7 +6,6 @@ import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
 import Post from "../Components/Post";
 import UserCard from "../Components/UserCard";
-// import { EXPLORE } from "../Routes/Explore/ExploreQueries";
 
 const TIMELINE_QUERY = gql`
   {

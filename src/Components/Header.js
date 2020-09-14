@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
-import { Logo, Paw, Explore } from "./Icons";
+import { Logo, Explore } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 import Avatar from "./Avatar";
+// import PopUp from "./PopUp";
+import NotifyLike from "./NotifyLike";
 
 const Header = styled.header`
   width: 100%;
@@ -55,6 +57,12 @@ const HeaderLink = styled(Link)`
   margin-right: 30px;
 `;
 
+const HeaderNote = styled.div`
+  margin-right: 30px;
+  cursor: pointer;
+  align-self: center;
+`;
+
 const EAvatar = styled(Avatar)``;
 
 export default withRouter(({ history }) => {
@@ -65,43 +73,62 @@ export default withRouter(({ history }) => {
     history.push(`/search?term=${search.value}`);
   };
   // console.log(data);
+
+  const [toggleButton, setToggleButton] = useState(false);
+  const handleButton = () => {
+    setToggleButton(!toggleButton);
+  };
+
+  console.log("data", data);
+
   return (
     !loading && (
-      <Header>
-        <HeaderWrapper>
-          <HeaderColumn>
-            <LogoLink to="/">
-              <Logo size={30} />
-            </LogoLink>
-          </HeaderColumn>
-          <HeaderColumn>
-            <form onSubmit={onSearchSubmit}>
-              <SearchInput
-                value={search.value}
-                onChange={search.onChange}
-                placeholder="Search"
-                required={false}
-              />
-            </form>
-          </HeaderColumn>
-          <HeaderColumn>
-            <HeaderLink to="/explore">
-              <Explore size={29} />
-            </HeaderLink>
-            <HeaderLink to="/notifications">
-              <Paw size={28} />
-            </HeaderLink>
-            {data.me !== undefined && (
-              <EAvatar
-                url={data.me.avatar}
-                size="sm"
-                link={true}
-                username={data.me.username}
-              />
-            )}
-          </HeaderColumn>
-        </HeaderWrapper>
-      </Header>
+      <>
+        <Header>
+          <HeaderWrapper>
+            <HeaderColumn>
+              <LogoLink to="/">
+                <Logo size={30} />
+              </LogoLink>
+            </HeaderColumn>
+            <HeaderColumn>
+              <form onSubmit={onSearchSubmit}>
+                <SearchInput
+                  value={search.value}
+                  onChange={search.onChange}
+                  placeholder="Search"
+                  required={false}
+                />
+              </form>
+            </HeaderColumn>
+            <HeaderColumn>
+              <HeaderLink to="/explore">
+                <Explore size={29} />
+              </HeaderLink>
+              <HeaderNote onClick={handleButton}>
+                {/* <Paw size={28} /> */}
+                <NotifyLike toggleButton={toggleButton} />
+              </HeaderNote>
+              {data.me !== undefined && (
+                <EAvatar
+                  url={data.me.avatar}
+                  size="sm"
+                  link={true}
+                  username={data.me.username}
+                />
+              )}
+            </HeaderColumn>
+          </HeaderWrapper>
+        </Header>
+        {/* {isOpenNoti && data.me && (
+          <PopUp
+            title={"알림"}
+            togglePopFn={toggleNote}
+            kind={"NOTIFICATION"}
+            data={data.me.username}
+          />
+        )} */}
+      </>
     )
   );
 });

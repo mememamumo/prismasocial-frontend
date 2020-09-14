@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { LOG_OUT, WHO_LIKES, NOTIFICATION } from "../SharedQueries";
+import { LOG_OUT, WHO_LIKES } from "../SharedQueries";
 import { Link } from "react-router-dom";
 import { X } from "./Icons";
 import Avatar from "./Avatar";
@@ -112,12 +113,6 @@ const UserRow = styled.div`
   justify-content: center;
 `;
 
-const Type = styled.div`
-  width: 100%;
-  display: flex;
-  margin-bottom: 10px;
-`;
-
 const AvatarField = styled.div`
   margin-right: 15px;
 `;
@@ -156,51 +151,7 @@ const EFollowButton = styled(FollowButton)`
   padding: 4px 6px;
 `;
 
-const TypeNameField = styled(NameField)`
-  width: auto;
-`;
-
-const TextField = styled.div`
-  display: flex;
-  margin-left: 15px;
-  align-items: center;
-  width: 250px;
-  min-width: 200px;
-`;
-
-const PostField = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const TypeButton = styled(PostField)``;
-
-const PostFile = styled.div`
-  width: 30px;
-  height: 30px;
-  background-image: url(${(props) => props.url});
-  background-position: center;
-  background-size: cover;
-`;
-
-const Text = styled.span`
-  font-size: 12px;
-  color: ${(props) => props.theme.blackColor};
-`;
-
-const CreatedTime = styled.span`
-  font-size: 11px;
-  color: ${(props) => props.theme.lightGreyColor};
-  margin-left: 6px;
-`;
-
 const PopUp = ({ togglePopFn, kind, title, data, postId }) => {
-  const seeNotificationQuery = useQuery(NOTIFICATION, {
-    skip: data === undefined || typeof data !== "string",
-    variables: { username: data }
-  });
   const { data: whoLikesData, loading: whoLikesLoading } = useQuery(WHO_LIKES, {
     skip: postId === undefined,
     variables: { postId }
