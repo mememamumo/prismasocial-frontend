@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { LOG_OUT, WHO_LIKES, NOTIFICATION } from "../SharedQueries";
 import { LOG_OUT, WHO_LIKES } from "../SharedQueries";
 import { Link } from "react-router-dom";
 import { X } from "./Icons";
