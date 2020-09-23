@@ -192,7 +192,12 @@ const ProfilePresenter = ({
         />
       )}
       {isOpenSetting && (
-        <PopUp title={"Setting"} kind={"SETTING"} togglePopFn={toggleSetting} />
+        <PopUp
+          title={"Setting"}
+          kind={"SETTING"}
+          togglePopFn={toggleSetting}
+          data={data.seeUser}
+        />
       )}
     </Wrapper>
   );

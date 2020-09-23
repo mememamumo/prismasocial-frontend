@@ -79,7 +79,7 @@ export default withRouter(({ history }) => {
     setToggleButton(!toggleButton);
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   return (
     !loading && (

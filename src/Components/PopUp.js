@@ -99,6 +99,22 @@ const SettingRow = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.opacityBlue};
 `;
 
+const ESettingRow = styled(Link)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:active {
+    background-color: ${(props) => props.theme.opacityBlue};
+  }
+  &:first-child {
+    border-top: 1px solid ${(props) => props.theme.opacityBlue};
+  }
+  height: 50px;
+  border-bottom: 1px solid ${(props) => props.theme.opacityBlue};
+`;
+
 const SettingText = styled.span`
   font-size: 16px;
   color: ${(props) => props.theme.blue};
@@ -221,9 +237,9 @@ const PopUp = ({ togglePopFn, kind, title, data, postId }) => {
               <SettingRow onClick={logOutClick}>
                 <SettingText>Log Out</SettingText>
               </SettingRow>
-              <SettingRow onClick={() => console.log("Edit")}>
+              <ESettingRow to={`/editProfile/${data.username}`}>
                 <SettingText>Edit Profile</SettingText>
-              </SettingRow>
+              </ESettingRow>
             </>
           )}
           {kind === kindEnum[4] ? (
