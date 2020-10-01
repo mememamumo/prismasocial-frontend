@@ -29,7 +29,7 @@ export default withRouter(({ history, toggleButton }) => {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
   return (
     <NotifyLikePresenter
