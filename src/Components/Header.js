@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
-import { Logo, Explore } from "./Icons";
+import { Logo, Explore, Upload } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 import Avatar from "./Avatar";
@@ -54,7 +54,12 @@ const LogoLink = styled(Link)`
 `;
 
 const HeaderLink = styled(Link)`
+  display: flex;
+  align-items: center;
   margin-right: 30px;
+  svg {
+    fill: ${(props) => props.theme.blue};
+  }
 `;
 
 const HeaderNote = styled.div`
@@ -109,6 +114,9 @@ export default withRouter(({ history }) => {
                 {/* <Paw size={28} /> */}
                 <NotifyLike toggleButton={toggleButton} />
               </HeaderNote>
+              <HeaderLink to="/upload">
+                <Upload size={26} />
+              </HeaderLink>
               {data.me !== undefined && (
                 <EAvatar
                   url={data.me.avatar}
