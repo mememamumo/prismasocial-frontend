@@ -26,8 +26,8 @@ export default () => {
     hiddenUser = users;
   }
 
-  console.log(data);
-  console.log(data && data.explore.users);
+  // console.log(data);
+  // console.log(data && data.explore.users);
   return (
     <>
       <Wrapper>

@@ -8,10 +8,12 @@ import Profile from "../Routes/Profile";
 import SeePost from "../Routes/SeePost";
 import Explore from "../Routes/Explore";
 import EditProfile from "../Routes/EditProfile";
+import Upload from "../Routes/Upload";
 
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Timeline} />
+    <Route exact path="/upload" component={Upload} />
     <Route exact path="/explore" component={Explore} />
     <Route exact path="/search" component={Search} />
     <Route exact path="/editProfile/:editUser" component={EditProfile} />
