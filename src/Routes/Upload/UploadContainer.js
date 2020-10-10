@@ -65,8 +65,8 @@ export default ({ history }) => {
             "Access-Control-Allow-Origin": "*"
           }
         })
-        // .then((res) => console.log("res.data", res.data.location))
-        // .catch((err) => console.log("err", err));
+        .then((res) => console.log("res.data", res.data.location))
+        .catch((err) => console.log("err", err));
 
       const {
         data: { upload }
