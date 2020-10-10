@@ -57,11 +57,7 @@ export default ({
           {isFile[0] && (
             <Slider>
               {blobFile.map((image, index) => (
-                <UploadImage
-                  url={image}
-                  key={index}
-                  onLoad={(e) => window.URL.revokeObjectURL(image)}
-                />
+                <UploadImage url={image} key={index} />
               ))}
             </Slider>
           )}

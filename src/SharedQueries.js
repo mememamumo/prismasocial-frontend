@@ -58,15 +58,5 @@ export const TIMELINE_QUERY = gql`
       }
       createdAt
     }
-    explore {
-      users {
-        id
-        avatar
-        username
-        bio
-        isFollowing
-        isSelf
-      }
-    }
   }
 `;

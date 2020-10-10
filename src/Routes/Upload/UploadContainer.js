@@ -51,34 +51,36 @@ export default ({ history }) => {
       formData.append("file", result);
     }
 
-    console.log(awsFile);
+    console.log("blob", blobFile);
+    console.log("awsFile", awsFile);
 
     try {
       setIsLoading(true);
       const {
-        data: { path }
-      } = await axios.post(`${url}/api/upload`, formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*"
-        }
-      });
-      // .then((res) => console.log(res.data))
-      // .catch((err) => console.log(err));
+        data: { location }
+      } = await axios
+        .post(`${url}/api/upload`, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*"
+          }
+        })
+        // .then((res) => console.log("res.data", res.data.location))
+        // .catch((err) => console.log("err", err));
 
       const {
         data: { upload }
       } = await uploadMutation({
         variables: {
-          files: path,
+          files: location,
           caption: captionInput.value,
           location: locationInput.value
         }
       });
 
       if (upload) {
-        toast.success("업로드 되었습니다.");
         console.log(upload);
+        toast.success("업로드 되었습니다.");
         history.push(`/`);
       }
     } catch (err) {
@@ -91,7 +93,7 @@ export default ({ history }) => {
 
   useEffect(() => {
     return () => window.URL.revokeObjectURL(blobFile);
-  }, [blobFile]);
+  }, []);
 
   return (
     <UploadPresenter

@@ -1,11 +1,51 @@
 import React from "react";
+import { gql } from "apollo-boost";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
 import Post from "../Components/Post";
 import UserCard from "../Components/UserCard";
-import { TIMELINE_QUERY } from "../SharedQueries";
+
+const TIMELINE_QUERY = gql`
+  {
+    seeFeed {
+      id
+      location
+      caption
+      user {
+        id
+        avatar
+        username
+      }
+      files {
+        id
+        url
+      }
+      likeCount
+      isLiked
+      comments {
+        id
+        text
+        user {
+          id
+          username
+        }
+      }
+      createdAt
+    }
+    explore {
+      users {
+        id
+        avatar
+        username
+        bio
+        isFollowing
+        isSelf
+      }
+    }
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
