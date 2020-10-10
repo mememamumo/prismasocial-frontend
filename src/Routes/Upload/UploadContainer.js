@@ -21,7 +21,7 @@ export default ({ history }) => {
   const url =
     process.env.NODE_ENV === "development"
       ? "http://localhost:8800"
-      : "https://prismasocial-backend.herokuapp.com";
+      : "http://prismasocial-backend.herokuapp.com";
 
   const handleChange = async (e) => {
     if (blobFile.length >= 5) {
