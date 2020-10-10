@@ -57,7 +57,7 @@ export default ({
           {isFile[0] && (
             <Slider>
               {blobFile.map((image, index) => (
-                <UploadImage url={image} key={index} />
+                <UploadImage url={image} key={index} crossorigin="anonymous" />
               ))}
             </Slider>
           )}
