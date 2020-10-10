@@ -9,12 +9,15 @@ import Loader from "../../Components/Loader";
 
 const Wrapper = styled.div`
   min-height: 80vh;
+  height: 468px;
+  display: flex;
 `;
 
 const UploadForm = styled.form`
   width: 50%;
   display: flex;
   flex-direction: column;
+  padding-top: 100px;
   margin: 0 auto;
 `;
 
@@ -27,14 +30,18 @@ const UploadImage = styled.div`
 `;
 
 const TextInput = styled(Input)`
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const FileSelect = styled.input`
-  margin-bottom: 50px !important;
+  margin-bottom: 30px !important;
 `;
 
-const ButtonContainer = styled.span``;
+const ButtonContainer = styled.div`
+  button {
+    width: 100%;
+  }
+`;
 
 export default ({
   isFile,
@@ -63,14 +70,14 @@ export default ({
           )}
           <UploadForm>
             <TextInput
-              placeholder="caption"
+              placeholder="글"
               value={captionInput.value}
               onChangeText={captionInput.onChange}
               required
               {...captionInput}
             />
             <TextInput
-              placeholder="location"
+              placeholder="위치"
               value={locationInput.value}
               onChangeText={locationInput.onChange}
               required

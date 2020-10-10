@@ -12,8 +12,8 @@ export default ({ history }) => {
   const awsFile = useState([])[0];
   const blobFile = useState([])[0];
   const [isFile, setIsFile] = useState({});
-  const captionInput = useInput("test");
-  const locationInput = useInput("test");
+  const captionInput = useInput("");
+  const locationInput = useInput("");
   const [uploadMutation] = useMutation(UPLOAD, {
     refetchQueries: () => [{ query: TIMELINE_QUERY }]
   });
@@ -51,8 +51,8 @@ export default ({ history }) => {
       formData.append("file", result);
     }
 
-    console.log("blob", blobFile);
-    console.log("awsFile", awsFile);
+    // console.log("blob", blobFile);
+    // console.log("awsFile", awsFile);
 
     try {
       setIsLoading(true);
@@ -79,7 +79,7 @@ export default ({ history }) => {
       });
 
       if (upload) {
-        console.log(upload);
+        // console.log(upload);
         toast.success("업로드 되었습니다.");
         history.push(`/`);
       }

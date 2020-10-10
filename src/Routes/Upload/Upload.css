@@ -1,14 +1,15 @@
 .slider {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  height: 300px;
+  width: 50%;
+  height: 468px;
   margin-bottom: 10px;
+  margin-right: 20px;
 }
 
 .slider a.previousButton,
 .slider a.nextButton {
-  font-size: 22px;
+  font-size: 18px;
   line-height: 0;
   display: block;
   position: absolute;
@@ -18,12 +19,17 @@
   -webkit-transition: all 0.1s linear;
   transition: all 0.1s linear;
   z-index: 1;
-  color: #333;
+  background-color: rgba(256, 256, 256, 0.6);
+  border-radius: 5px;
   padding: 10px;
   text-decoration: none;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  /* prevent jump effect when scaling */
+}
+
+.slider a.previousButton polygon,
+.slider a.nextButton polygon {
+  fill: #003589;
 }
 
 .slider a.previousButton:not(.disabled):hover,
