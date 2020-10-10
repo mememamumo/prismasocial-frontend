@@ -21,7 +21,7 @@ export default ({ history }) => {
   const url =
     process.env.NODE_ENV === "development"
       ? "http://localhost:8800"
-      : "http://prismasocial-backend.herokuapp.com";
+      : "https://prismasocial-backend.herokuapp.com";
 
   const handleChange = async (e) => {
     if (blobFile.length >= 5) {
@@ -59,7 +59,7 @@ export default ({ history }) => {
       const {
         data: { location }
       } = await axios
-        .post(`${url}/api/upload`, formData, {
+        .post(`${url}/api/uploads`, formData, {
           headers: {
             "content-type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*"
@@ -72,7 +72,7 @@ export default ({ history }) => {
         data: { upload }
       } = await uploadMutation({
         variables: {
-          files: location,
+          files: [location],
           caption: captionInput.value,
           location: locationInput.value
         }
@@ -93,7 +93,7 @@ export default ({ history }) => {
 
   useEffect(() => {
     return () => window.URL.revokeObjectURL(blobFile);
-  }, []);
+  }, [blobFile]);
 
   return (
     <UploadPresenter
