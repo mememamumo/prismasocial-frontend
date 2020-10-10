@@ -72,7 +72,7 @@ export default ({ history }) => {
         data: { upload }
       } = await uploadMutation({
         variables: {
-          files: [location],
+          files: location,
           caption: captionInput.value,
           location: locationInput.value
         }
