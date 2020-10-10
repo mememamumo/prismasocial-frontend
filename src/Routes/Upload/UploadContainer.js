@@ -59,7 +59,7 @@ export default ({ history }) => {
       const {
         data: { location }
       } = await axios
-        .post(`${url}/api/uploads`, formData, {
+        .post(`${url}/api/upload`, formData, {
           headers: {
             "content-type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*"
