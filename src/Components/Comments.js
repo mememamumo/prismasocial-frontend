@@ -12,7 +12,7 @@ const CommentContainer = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 5px;
+  padding-top: 16px;
 `;
 
 const CommentWrapper = styled.li`

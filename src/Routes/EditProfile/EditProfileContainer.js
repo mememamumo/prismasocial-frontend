@@ -68,7 +68,6 @@ export default ({
     blobFile.push(obj);
     awsFile.shift();
     awsFile.push(file[0]);
-    console.log("awsFirst", awsFile);
   };
 
   const url =

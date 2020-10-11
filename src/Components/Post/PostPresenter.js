@@ -166,9 +166,7 @@ const Textarea = styled(TextareaAutosize)`
   }
 `;
 
-const CommentsWrap = styled.div`
-  padding: 16px 0 0;
-`;
+const CommentsWrap = styled.div``;
 
 const LikeSection = styled.div`
   cursor: pointer;

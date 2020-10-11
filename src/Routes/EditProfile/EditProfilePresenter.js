@@ -92,7 +92,6 @@ export default ({
   setLastName,
   setBio,
   onSubmit,
-  action,
   handleChange,
   handleAvatar,
   isFile,
