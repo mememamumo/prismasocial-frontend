@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/ko";
-import { Paw } from "../Icons";
+import { Paw, FullPaw } from "../Icons";
 import Avatar from "../Avatar";
 import BoldText from "../BoldText";
 import Loader from "../Loader";
@@ -116,6 +116,15 @@ const Timestamp = styled.div`
   opacity: 0.7;
 `;
 
+const EFullPaw = styled(FullPaw)`
+  svg {
+    fill: ${(props) => props.theme.bgPinkColor};
+    path {
+      fill: ${(props) => props.theme.bgPinkColor};
+    }
+  }
+`;
+
 const NotifyPresenter = ({ data, loading, toggleButton, handleClick }) => {
   // console.log("noti", data);
   return (
@@ -141,7 +150,7 @@ const NotifyPresenter = ({ data, loading, toggleButton, handleClick }) => {
         <>
           {!loading && data && data.seeLike && (
             <Container>
-              <Paw />
+              <EFullPaw />
               {toggleButton === true && (
                 <NotifiWrapper>
                   <NotiScroll>

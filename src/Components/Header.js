@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
 import { Logo, Explore, Upload } from "./Icons";
@@ -9,6 +9,7 @@ import { ME } from "../SharedQueries";
 import Avatar from "./Avatar";
 // import PopUp from "./PopUp";
 import NotifyLike from "./NotifyLike";
+import { NavLink } from "react-router-dom";
 
 const Header = styled.header`
   width: 100%;
@@ -49,16 +50,32 @@ const SearchInput = styled(Input)`
   margin: 10px 0 20px;
 `;
 
-const LogoLink = styled(Link)`
+const LogoLink = styled(NavLink)`
   margin-left: 30px;
+  &.active {
+    svg {
+      fill: ${(props) => props.theme.bgPinkColor};
+      path {
+        fill: ${(props) => props.theme.bgPinkColor};
+      }
+    }
+  }
 `;
 
-const HeaderLink = styled(Link)`
+const HeaderLink = styled(NavLink)`
   display: flex;
   align-items: center;
   margin-right: 30px;
   svg {
     fill: ${(props) => props.theme.blue};
+  }
+  &.active {
+    svg {
+      fill: ${(props) => props.theme.bgPinkColor};
+      path {
+        fill: ${(props) => props.theme.bgPinkColor};
+      }
+    }
   }
 `;
 
@@ -92,7 +109,7 @@ export default withRouter(({ history }) => {
         <Header>
           <HeaderWrapper>
             <HeaderColumn>
-              <LogoLink to="/">
+              <LogoLink exact activeClassName="active" to="/">
                 <Logo size={30} />
               </LogoLink>
             </HeaderColumn>
@@ -107,14 +124,14 @@ export default withRouter(({ history }) => {
               </form>
             </HeaderColumn>
             <HeaderColumn>
-              <HeaderLink to="/explore">
+              <HeaderLink exact activeClassName="active" to="/explore">
                 <Explore size={29} />
               </HeaderLink>
               <HeaderNote onClick={handleButton}>
                 {/* <Paw size={28} /> */}
                 <NotifyLike toggleButton={toggleButton} />
               </HeaderNote>
-              <HeaderLink to="/upload">
+              <HeaderLink exact activeClassName="active" to="/upload">
                 <Upload size={26} />
               </HeaderLink>
               {data.me !== undefined && (
@@ -123,6 +140,7 @@ export default withRouter(({ history }) => {
                   size="sm"
                   link={true}
                   username={data.me.username}
+                  activeClassName="active"
                 />
               )}
             </HeaderColumn>
