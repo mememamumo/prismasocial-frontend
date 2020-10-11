@@ -34,7 +34,7 @@ const TextInput = styled(Input)`
 `;
 
 const FileSelect = styled.input`
-  margin-bottom: 30px !important;
+  margin-bottom: 50px !important;
 `;
 
 const ButtonContainer = styled.div`

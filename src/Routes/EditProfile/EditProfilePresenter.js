@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
@@ -21,10 +20,17 @@ const Wrapper = styled.div`
 const Header = styled.header`
   ${(props) => props.theme.toneBox};
   padding: 40px 30px;
+  position: relative;
 `;
 
+const AvatarContainer = styled.div`
+  position: relative;
+`;
+
+const Wrap = styled.div``;
+
 const EAvatar = styled(Avatar)`
-  margin: 0 auto 30px;
+  margin: 0 auto 20px;
 `;
 
 const EButton = styled(Button)`
@@ -69,6 +75,12 @@ const Text = styled.div`
   margin-bottom: 5px;
 `;
 
+const AvatarUploadInput = styled.input``;
+
+const ButtonContainer = styled.div`
+  margin-top: 20px;
+`;
+
 // * Don't do it this way. => const EditProfilePresenter
 // Use it this => "export default" , to use useInput in conditional.
 export default ({
@@ -80,7 +92,12 @@ export default ({
   setLastName,
   setBio,
   onSubmit,
-  action
+  action,
+  handleChange,
+  handleAvatar,
+  isFile,
+  blobFile,
+  fileLoading
 }) => {
   if (loading === true) {
     return (
@@ -104,16 +121,33 @@ export default ({
         <Helmet>
           <title>Edit Profile | {`${seeUser.username}`}</title>
         </Helmet>
-        {action === "view" && (
-          <FormWrap>
+        <FormWrap>
             <Header>
-              <EAvatar
-                size="lg"
-                url={seeUser.avatar}
-                username={seeUser.username}
-                link={false}
-              />
-              <EButton text={"프로필 사진 바꾸기"} />
+              <AvatarContainer>
+                {fileLoading && <Loader />}
+                {isFile[0] ? (
+                  <Wrap>
+                    {blobFile.map((url, index) => <EAvatar
+                      size="lg"
+                      url={url}
+                      username={seeUser.username}
+                      link={false}
+                      key={index}
+                    />)}
+                  </Wrap>
+                ) : (
+                  <EAvatar
+                    size="lg"
+                    url={seeUser.avatar}
+                    username={seeUser.username}
+                    link={false}
+                  />
+                )}
+                <AvatarUploadInput type="file" id="avatarElem" accept="image/*" onChange={handleAvatar} />
+              </AvatarContainer>
+              <ButtonContainer onClick={handleChange}>
+                <EButton text={"프로필 사진 등록"} />
+              </ButtonContainer>
               <UserColumn>
                 <EBoldText text={username.value} />
                 <EBoldText text={`${firstName.value} ${lastName.value}`} />
@@ -157,8 +191,6 @@ export default ({
               <EFButton text={"Edit Profile"} />
             </Form>
           </FormWrap>
-        )}
-        {action === "profile" && <Redirect to="/" />}
       </Wrapper>
     );
   }
