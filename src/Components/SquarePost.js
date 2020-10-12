@@ -10,6 +10,9 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 300px;
   grid-auto-rows: 300px;
+  @media ${(props) => props.theme.mobile} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Overlay = styled.div`

@@ -3,7 +3,22 @@ const RADIUS = "5px";
 const BACKGROUND_FILL_COLOR = "#d9b2ce";
 const BACKGROUND_GRID_COLOR = "rgba(70, 41, 64, 0.3)";
 
+const size = {
+	mobile: "770px",
+	tabletS: "1023px",
+	tabletM: "1220px",
+	tabletL: "1280px",
+	laptop: "1460px",
+	desktop: "1700px"
+}
+
 export default {
+	mobile: `(max-width: ${size.mobile})`,
+	tabletS: `(max-width: ${size.tabletS})`,
+	tabletM: `(max-width: ${size.tabletM})`,
+	tabletL: `(max-width: ${size.tabletL})`,
+	laptop: `(max-width: ${size.laptop})`,
+	desktop: `(max-width: ${size.desktop})`,
   maxWidth: "935px",
   bgColor: "#f6eee2",
   bgPinkColor: "#d9b2ce",

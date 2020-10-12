@@ -13,6 +13,9 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(5, 18.5%);
   grid-template-rows: 170px;
   grid-auto-rows: 170px;
+  @media ${(props) => props.theme.mobile} {
+    grid-template-columns: repeat(3, 33.333%);
+  }
 `;
 
 const Card = styled.div`

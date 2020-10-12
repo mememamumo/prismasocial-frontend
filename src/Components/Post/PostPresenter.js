@@ -66,6 +66,10 @@ const PostFile = styled.div`
   background-position: center;
   opacity: ${(props) => (props.showing ? 1 : 0)};
   transition: opacity 0.5s linear;
+  @media ${(props) => props.theme.mobile} {
+    height: 100%;
+    padding-top: 100%;
+  }
 `;
 
 const ToggleSlide = styled.div`
@@ -73,6 +77,10 @@ const ToggleSlide = styled.div`
   display: flex;
   margin-top: 290px;
   margin-bottom: 230px;
+  @media ${(props) => props.theme.mobile} {
+    margin-top: 0;
+    margin-bottom: 100%;
+  }
 `;
 
 const PrevButton = styled.div`

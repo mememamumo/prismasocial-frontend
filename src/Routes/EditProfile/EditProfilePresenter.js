@@ -15,12 +15,19 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  @media ${(props) => props.theme.mobile} {
+    padding: 0;
+  }
 `;
 
 const Header = styled.header`
   ${(props) => props.theme.toneBox};
   padding: 40px 30px;
   position: relative;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    border-radius: 0;
+  }
 `;
 
 const AvatarContainer = styled.div`
@@ -40,6 +47,12 @@ const EButton = styled(Button)`
 
 const FormWrap = styled.div`
   display: flex;
+  @media ${(props) => props.theme.mobile} {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Form = styled.form`
@@ -48,6 +61,9 @@ const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
+  @media ${(props) => props.theme.mobile} {
+    margin-left: 0;
+  }
 `;
 
 const UserColumn = styled.div``;
@@ -121,75 +137,75 @@ export default ({
           <title>Edit Profile | {`${seeUser.username}`}</title>
         </Helmet>
         <FormWrap>
-            <Header>
-              <AvatarContainer>
-                {fileLoading && <Loader />}
-                {isFile[0] ? (
-                  <Wrap>
-                    {blobFile.map((url, index) => <EAvatar
-                      size="lg"
-                      url={url}
-                      username={seeUser.username}
-                      link={false}
-                      key={index}
-                    />)}
-                  </Wrap>
-                ) : (
-                  <EAvatar
+          <Header>
+            <AvatarContainer>
+              {fileLoading && <Loader />}
+              {isFile[0] ? (
+                <Wrap>
+                  {blobFile.map((url, index) => <EAvatar
                     size="lg"
-                    url={seeUser.avatar}
+                    url={url}
                     username={seeUser.username}
                     link={false}
-                  />
-                )}
-                <AvatarUploadInput type="file" id="avatarElem" accept="image/*" onChange={handleAvatar} />
-              </AvatarContainer>
-              <ButtonContainer onClick={handleChange}>
-                <EButton text={"프로필 사진 등록"} />
-              </ButtonContainer>
-              <UserColumn>
-                <EBoldText text={username.value} />
-                <EBoldText text={`${firstName.value} ${lastName.value}`} />
-                <EBoldText text={seeUser.email} />
-                <BioText>{bio.value}</BioText>
-              </UserColumn>
-            </Header>
-            <Form onSubmit={onSubmit}>
-              <Text>사용자 이름</Text>
-              <Input
-                placeholder={""}
-                value={username.value}
-                onChange={username.onChange}
-                type="text"
-                required={false}
-              />
-              <Text>성</Text>
-              <Input
-                placeholder={""}
-                value={firstName.value}
-                onChange={firstName.onChange}
-                type="text"
-                required={false}
-              />
-              <Text>이름</Text>
-              <Input
-                placeholder={""}
-                value={lastName.value}
-                onChange={lastName.onChange}
-                type="text"
-                required={false}
-              />
-              <Text>소개</Text>
-              <Input
-                placeholder={""}
-                value={bio.value}
-                onChange={bio.onChange}
-                type="text"
-                required={false}
-              />
-              <EFButton text={"Edit Profile"} />
-            </Form>
-          </FormWrap>
+                    key={index}
+                  />)}
+                </Wrap>
+              ) : (
+                <EAvatar
+                  size="lg"
+                  url={seeUser.avatar}
+                  username={seeUser.username}
+                  link={false}
+                />
+              )}
+              <AvatarUploadInput type="file" id="avatarElem" accept="image/*" onChange={handleAvatar} />
+            </AvatarContainer>
+            <ButtonContainer onClick={handleChange}>
+              <EButton text={"프로필 사진 등록"} />
+            </ButtonContainer>
+            <UserColumn>
+              <EBoldText text={username.value} />
+              <EBoldText text={`${firstName.value} ${lastName.value}`} />
+              <EBoldText text={seeUser.email} />
+              <BioText>{bio.value}</BioText>
+            </UserColumn>
+          </Header>
+          <Form onSubmit={onSubmit}>
+            <Text>사용자 이름</Text>
+            <Input
+              placeholder={""}
+              value={username.value}
+              onChange={username.onChange}
+              type="text"
+              required={false}
+            />
+            <Text>성</Text>
+            <Input
+              placeholder={""}
+              value={firstName.value}
+              onChange={firstName.onChange}
+              type="text"
+              required={false}
+            />
+            <Text>이름</Text>
+            <Input
+              placeholder={""}
+              value={lastName.value}
+              onChange={lastName.onChange}
+              type="text"
+              required={false}
+            />
+            <Text>소개</Text>
+            <Input
+              placeholder={""}
+              value={bio.value}
+              onChange={bio.onChange}
+              type="text"
+              required={false}
+            />
+            <EFButton text={"Edit Profile"} />
+          </Form>
+        </FormWrap>
       </Wrapper>
     );
   }

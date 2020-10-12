@@ -89,3 +89,16 @@
 .slide.animateOut.next {
   left: -100%;
 }
+
+@media screen and (max-width: 770px) {
+  .slider {
+    margin-bottom: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .slider .slide {
+    background-size: contain;
+    background-position: center;
+  }
+}

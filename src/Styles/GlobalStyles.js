@@ -18,6 +18,9 @@ export default createGlobalStyle`
 		font-size: 14px;
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 		padding-top: 160px;
+		@media ${(props) => props.theme.mobile} {
+      padding-top: 130px;
+    }
 	}
 	a {
 		color: ${(props) => props.theme.blue};
@@ -25,6 +28,9 @@ export default createGlobalStyle`
 		&:hover {
 			color: ${(props) => props.theme.pink};
 		}
+	}
+	input {
+		border-radius: 0;
 	}
 	input:focus {
 		outline:none;

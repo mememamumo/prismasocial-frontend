@@ -30,6 +30,9 @@ const PostBox = styled.div`
   a {
     color: inherit;
   }
+  @media ${(props) => props.theme.mobile} {
+    flex-direction: column;
+  }
 `;
 
 // -> slide
@@ -42,6 +45,9 @@ const Files = styled.div`
   flex-direction: column;
   align-items: stretch;
   flex-shrink: 0;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+  }
 `;
 
 const PostFile = styled.div`
@@ -58,6 +64,11 @@ const PostFile = styled.div`
   background-position: center;
   opacity: ${(props) => (props.showing ? 1 : 0)};
   transition: opacity 0.5s linear;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    height: 100%;
+    padding-top: 100%;
+  }
 `;
 
 const ToggleSlide = styled.div`
@@ -65,6 +76,10 @@ const ToggleSlide = styled.div`
   display: flex;
   margin-top: 290px;
   margin-bottom: 230px;
+  @media ${(props) => props.theme.mobile} {
+    margin-top: 0;
+    margin-bottom: 100%;
+  }
 `;
 
 const PrevButton = styled.div`
@@ -131,6 +146,9 @@ const MetaHeader = styled.div`
 
 const Username = styled.span`
   margin-left: 10px;
+  @media ${(props) => props.theme.mobile} {
+    flex: 1;
+  }
 `;
 
 const EFollowButton = styled(FollowButton)`
@@ -273,6 +291,9 @@ const MetaScroll = styled.div`
   }
   //
   padding-bottom: 150px;
+  @media ${(props) => props.theme.mobile} {
+    background-color: ${props => props.theme.bgLightGreyColor};
+  }
 `;
 
 const MetaBottom = styled.div`

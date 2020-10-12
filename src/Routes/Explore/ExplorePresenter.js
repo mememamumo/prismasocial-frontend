@@ -24,6 +24,9 @@ const UserColumn = styled.div`
   padding: 0 15px 15px;
   display: flex;
   flex-direction: column;
+  @media ${(props) => props.theme.mobile} {
+    padding: 0 15px 0;
+  }
 `;
 
 const MetaLine = styled.div`
@@ -43,6 +46,9 @@ const PostColumn = styled.div`
   padding: 0 15px 0;
   display: flex;
   flex-direction: column;
+  @media ${(props) => props.theme.mobile} {
+    padding: 0;
+  }
 `;
 
 const ExplorePresenter = ({ data, loading }) => {

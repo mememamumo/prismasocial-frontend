@@ -51,6 +51,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media ${(props) => props.theme.mobile} {
+    margin: 0 14px;
+  }
 `;
 
 const UserColumn = styled.div``;

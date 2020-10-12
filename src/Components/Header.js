@@ -19,6 +19,9 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   z-index: 2;
+  @media ${(props) => props.theme.mobile} {
+    top: 14px;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -28,6 +31,9 @@ const HeaderWrapper = styled.div`
   justify-content: center;
   align-items: center;
   ${(props) => props.theme.box};
+  @media ${(props) => props.theme.mobile} {
+    margin: 0 14px;
+  }
 `;
 
 const HeaderColumn = styled.div`
@@ -43,6 +49,15 @@ const HeaderColumn = styled.div`
     text-align: right;
     display: flex;
     justify-content: flex-end;
+    @media ${(props) => props.theme.mobile} {
+      margin-right: 20px;
+    }
+  }
+`;
+
+const EHeaderColumn = styled(HeaderColumn)`
+  @media ${(props) => props.theme.mobile} {
+    width: 20%;
   }
 `;
 
@@ -59,6 +74,9 @@ const LogoLink = styled(NavLink)`
         fill: ${(props) => props.theme.bgPinkColor};
       }
     }
+  }
+  @media ${(props) => props.theme.mobile} {
+    margin-left: 20px;
   }
 `;
 
@@ -77,12 +95,18 @@ const HeaderLink = styled(NavLink)`
       }
     }
   }
+  @media ${(props) => props.theme.mobile} {
+    margin-right: 10px;
+  }
 `;
 
 const HeaderNote = styled.div`
   margin-right: 30px;
   cursor: pointer;
   align-self: center;
+  @media ${(props) => props.theme.mobile} {
+    margin-right: 10px;
+  }
 `;
 
 const EAvatar = styled(Avatar)``;
@@ -108,11 +132,11 @@ export default withRouter(({ history }) => {
       <>
         <Header>
           <HeaderWrapper>
-            <HeaderColumn>
+            <EHeaderColumn>
               <LogoLink exact activeClassName="active" to="/">
                 <Logo size={30} />
               </LogoLink>
-            </HeaderColumn>
+            </EHeaderColumn>
             <HeaderColumn>
               <form onSubmit={onSearchSubmit}>
                 <SearchInput

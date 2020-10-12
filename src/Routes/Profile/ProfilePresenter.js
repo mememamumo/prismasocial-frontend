@@ -28,6 +28,11 @@ const Header = styled.header`
   width: 80%;
   margin: 0 auto;
   margin-bottom: 60px;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    margin-bottom: 30px;
+    flex-direction: column;
+  }
 `;
 
 const Picture = styled.div`
@@ -35,14 +40,23 @@ const Picture = styled.div`
   margin-right: 30px;
   justify-content: center;
   width: 200px;
+  @media ${(props) => props.theme.mobile} {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
 `;
 
 const HeaderColumn = styled.div`
-  flex: 1;
+  @media ${(props) => props.theme.mobile} {
+    width: 90%;
+  }
 `;
 
 const UsernameRow = styled.div`
   display: flex;
+  @media ${(props) => props.theme.mobile} {
+    justify-content: center;
+  }
 `;
 
 const Username = styled.span`
@@ -59,6 +73,9 @@ const EFollowButton = styled(FollowButton)`
 const Counts = styled.ul`
   display: flex;
   margin: 15px 0;
+  @media ${(props) => props.theme.mobile} {
+    justify-content: center;
+  }
 `;
 
 const PostCount = styled.li`
@@ -74,6 +91,11 @@ const FollowingsCount = styled.li`
 
 const Count = styled.div`
   font-size: 17px;
+  @media ${(props) => props.theme.mobile} {
+    span {
+      margin-left: 10px;
+    }
+  }
 `;
 
 const FullName = styled(BoldText)`

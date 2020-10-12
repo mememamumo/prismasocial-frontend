@@ -16,6 +16,9 @@ const Section = styled.div`
 
 const PostSection = styled(Section)`
   padding: 0 15px 15px;
+  // @media ${(props) => props.theme.mobile} {
+  //   padding: 0;
+  // }
 `;
 
 const EBoldText = styled(BoldText)`
