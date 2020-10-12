@@ -12,6 +12,10 @@ import { More } from "../../Components/Icons";
 
 const Wrapper = styled.div`
   min-height: 100vh;
+  margin-top: 20px;
+  @media ${(props) => props.theme.mobile} {
+    margin-top: 0;
+  }
 `;
 
 const ProfileBox = styled.div`
@@ -47,6 +51,7 @@ const Picture = styled.div`
 `;
 
 const HeaderColumn = styled.div`
+  flex: 1;
   @media ${(props) => props.theme.mobile} {
     width: 90%;
   }
