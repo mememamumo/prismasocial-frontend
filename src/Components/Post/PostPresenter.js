@@ -125,6 +125,10 @@ const SlideIndicator = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${(props) => props.theme.mobile} {
+    position: absolute;
+    bottom: 10px;
+  }
 `;
 // <- slide
 
