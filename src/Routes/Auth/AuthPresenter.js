@@ -30,6 +30,32 @@ const Link = styled.span`
 
 const Form = styled.div``;
 
+//Test
+const Test = styled.div`
+  padding: 20px 14px 16px;
+  margin-bottom: 20px;
+  background-color: ${(props) => props.theme.opacityBlue};
+  b {
+    font-weight: bold;
+    margin-right: 3px;
+  }
+`;
+
+const TestTitle = styled.p`
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+const TestEmail = styled.p`
+  margin-bottom: 4px;
+`;
+
+const TestPassword = styled.p``;
+
+const TestNotice = styled.p`
+  margin-top: 10px;
+  line-height: 1.1;
+`;
+
 export default ({
   action,
   username,
@@ -66,6 +92,12 @@ export default ({
             />
             <Button text={"Log In"} />
           </form>
+          <Test>
+            <TestTitle>테스트 계정</TestTitle>
+            <TestEmail><b>이메일</b> test@test.com</TestEmail>
+            <TestPassword><b>비밀번호</b> 123456</TestPassword>
+            <TestNotice>테스트 계정입니다. 가입 없이 로그인 하실 수 있습니다.</TestNotice>
+          </Test>
         </>
       )}
       {action === "signUp" && (
