@@ -61,7 +61,7 @@ export default ({ userArray }) => {
 const UserCard = ({ id, username, isFollowing, url, isSelf }) => {
   return (
     <Card>
-      <EAvatar url={url} size={"md"} />
+      <EAvatar url={url} size={"md"} username={username} />
       <ELink to={`/${username}`}>
         <BoldText text={username} />
       </ELink>

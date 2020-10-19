@@ -13,12 +13,12 @@ const size = {
 }
 
 export default {
-	mobile: `(max-width: ${size.mobile})`,
-	tabletS: `(max-width: ${size.tabletS})`,
-	tabletM: `(max-width: ${size.tabletM})`,
-	tabletL: `(max-width: ${size.tabletL})`,
-	laptop: `(max-width: ${size.laptop})`,
-	desktop: `(max-width: ${size.desktop})`,
+  mobile: `(max-width: ${size.mobile})`,
+  tabletS: `(max-width: ${size.tabletS})`,
+  tabletM: `(max-width: ${size.tabletM})`,
+  tabletL: `(max-width: ${size.tabletL})`,
+  laptop: `(max-width: ${size.laptop})`,
+  desktop: `(max-width: ${size.desktop})`,
   maxWidth: "935px",
   bgColor: "#f6eee2",
   bgPinkColor: "#d9b2ce",

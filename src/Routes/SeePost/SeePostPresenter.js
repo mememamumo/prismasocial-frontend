@@ -124,6 +124,8 @@ const SlideIndicator = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 10px;
 `;
 // <- slide
 
@@ -142,6 +144,9 @@ const MetaHeader = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid ${(props) => props.theme.opacityBlue};
+  @media ${(props) => props.theme.mobile} {
+    background-color: ${(props) => props.theme.bgLightGreyColor};
+  }
 `;
 
 const Username = styled.span`
@@ -293,6 +298,8 @@ const MetaScroll = styled.div`
   padding-bottom: 150px;
   @media ${(props) => props.theme.mobile} {
     background-color: ${props => props.theme.bgLightGreyColor};
+    padding-bottom: 0;
+    overflow: inherit;
   }
 `;
 
@@ -302,6 +309,9 @@ const MetaBottom = styled.div`
   left: 0;
   width: 100%;
   background-color: ${(props) => props.theme.bgLightGreyColor};
+  @media ${(props) => props.theme.mobile} {
+    position: relative;
+  }
 `;
 
 export default (props) => {
